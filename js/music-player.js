@@ -8,7 +8,7 @@
       {
         name: '众神眷恋的幻想乡 (手风琴版)',
         artist: '枫琴Sakuya',
-        url: 'mmusic/bilibili@BV1L3411T7Ef@【手风琴改编】众神眷恋的幻想乡@枫琴Sakuya.mp3'
+        url: '/blog/music/bilibili@BV1L3411T7Ef@【手风琴改编】众神眷恋的幻想乡@枫琴Sakuya.mp3'
       }
     ]
 

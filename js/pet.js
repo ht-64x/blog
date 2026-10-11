@@ -1,7 +1,7 @@
 // 桌宠：蓝鲸娘（GIF 版）
 // 行为：待机 -> 随机张望/等待 -> 偶尔挥手；可拖拽；点击有反应；双击隐藏
 ;(function () {
-  var PET_DIR = 'ppet/'
+  var PET_DIR = '/blog/pet/'
   var GIF = {
     idle: 'big-blue-whale-idle.gif',
     waiting: 'big-blue-whale-waiting.gif',
@@ -18,7 +18,7 @@
 
   function init() {
     if (document.getElementById('dsh-pet')) return
-    if (window.matchMedia('(max-width: 768px)').matches) return
+    // 手机端也显示（缩小尺寸由 CSS 控制）
 
     var pet = document.createElement('div')
     pet.id = 'dsh-pet'
