@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://ht-64x.github.io/blog/posts/2217363806/</loc>
+    
+    <lastmod>2026-10-11</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://ht-64x.github.io/blog/posts/3223447510/</loc>
     
     <lastmod>2026-10-11</lastmod>
@@ -144,6 +153,27 @@
   
   <url>
     <loc>https://ht-64x.github.io/blog/tags/NAS/</loc>
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://ht-64x.github.io/blog/tags/%E4%B8%B2%E6%B5%81/</loc>
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://ht-64x.github.io/blog/tags/UU%E8%BF%9C%E7%A8%8B/</loc>
+    <lastmod>2026-10-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://ht-64x.github.io/blog/tags/%E5%B9%B3%E6%9D%BF/</loc>
     <lastmod>2026-10-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
