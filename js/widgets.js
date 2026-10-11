@@ -33,12 +33,24 @@
       '</div>' +
       '</div>'
 
-    // 插入到 sticky_layout 内部最末尾（与最新文章/网站信息卡同层），避免与 sticky 定位层重叠
+
+    // ---- 打赏卡（收款码点击放大） ----
+    var reward = document.createElement('div')
+    reward.className = 'card-widget dsh-reward-card'
+    reward.innerHTML =
+      '<div class="dsh-clock-headline"><i class="fas fa-mug-hot"></i> 请寒塘喝一杯</div>' +
+      '<img class="dsh-reward-qr" src="/blog/images/reward/alipay.jpg" alt="支付宝收款码" loading="lazy">' +
+      '<div class="dsh-reward-tip">资源帮到你了？可以请我喝杯饮料 ☕</div>'
+    reward.querySelector('.dsh-reward-qr').addEventListener('click', function () {
+      this.classList.toggle('zoom')
+    })
     var sticky = aside.querySelector('.sticky_layout')
     if (sticky) {
       sticky.appendChild(wrap)
+      sticky.appendChild(reward)
     } else {
       aside.appendChild(wrap)
+      aside.appendChild(reward)
     }
 
     // ============ 时钟 ============
