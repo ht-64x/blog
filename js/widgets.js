@@ -146,7 +146,7 @@
       var img = pet.querySelector('.dsh-pet-img')
       var petSrc = img.src
       // 挥手动画
-      img.src = '/pet/big-blue-whale-waving.gif?t=' + Date.now()
+      img.src = 'ppet/big-blue-whale-waving.gif?t=' + Date.now()
       if (window.anime) {
         window.anime.animate(pet, {
           translateY: [0, -18, 0, -12, 0],

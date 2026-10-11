@@ -1,7 +1,7 @@
 // 桌宠：蓝鲸娘（GIF 版）
 // 行为：待机 -> 随机张望/等待 -> 偶尔挥手；可拖拽；点击有反应；双击隐藏
 ;(function () {
-  var PET_DIR = '/pet/'
+  var PET_DIR = 'ppet/'
   var GIF = {
     idle: 'big-blue-whale-idle.gif',
     waiting: 'big-blue-whale-waiting.gif',
