@@ -8,7 +8,8 @@
       {
         name: '众神眷恋的幻想乡 (手风琴版)',
         artist: '枫琴Sakuya',
-        url: '/blog/music/bilibili@BV1L3411T7Ef@【手风琴改编】众神眷恋的幻想乡@枫琴Sakuya.mp3'
+        url: '/blog/music/bilibili@BV1L3411T7Ef@【手风琴改编】众神眷恋的幻想乡@枫琴Sakuya.mp3',
+        lrc: ''  // 同目录放 .lrc 文件后填路径
       }
     ]
 
@@ -22,6 +23,7 @@
       '</div>' +
       '<div class="dsh-music-progress"><div class="dsh-music-bar"><div class="dsh-music-bar-fill"></div></div>' +
       '<div class="dsh-music-time"><span class="t-cur">00:00</span><span class="t-total">00:00</span></div></div>' +
+      '<div class="dsh-music-lyric"></div>' +
       '<div class="dsh-music-controls">' +
       '<button class="dsh-music-prev" title="上一首"><i class="fas fa-step-backward"></i></button>' +
       '<button class="dsh-music-play" title="播放/暂停"><i class="fas fa-play"></i></button>' +
@@ -56,8 +58,50 @@
       audio.src = t.url
       nameEl.textContent = t.name
       artistEl.textContent = t.artist
+      loadLrc(t)
       if (autoplay) play()
     }
+
+    // ---- LRC 歌词：playlist 条目加 lrc 字段即可自动加载同步 ----
+    var lyricEl = player.querySelector('.dsh-music-lyric')
+    var lrcLines = []   // [{ t: 秒, text: 歌词 }]
+    function parseLrc(text) {
+      var out = []
+      text.split(/\r?\n/).forEach(function (line) {
+        var m = line.match(/\[(\d{1,2}):(\d{1,2})(?:\.(\d{1,3}))?\]/g)
+        if (!m) return
+        var content = line.replace(/\[[^\]]*\]/g, '').trim()
+        m.forEach(function (tag) {
+          var mm = tag.match(/\[(\d{1,2}):(\d{1,2})(?:\.(\d{1,3}))?\]/)
+          var sec = parseInt(mm[1]) * 60 + parseInt(mm[2]) + (mm[3] ? parseInt(mm[3].padEnd(3, '0')) / 1000 : 0)
+          if (content) out.push({ t: sec, text: content })
+        })
+      })
+      return out.sort(function (a, b) { return a.t - b.t })
+    }
+    function loadLrc(track) {
+      lrcLines = []
+      lyricEl.textContent = ''
+      if (!track.lrc) return
+      fetch(track.lrc).then(function (r) { return r.ok ? r.text() : '' }).then(function (txt) {
+        if (!txt) return
+        lrcLines = parseLrc(txt)
+      }).catch(function () {})
+    }
+    audio.addEventListener('timeupdate', function () {
+      // 歌词同步：二分位置更新当前行
+      if (!lrcLines.length || !lyricEl) return
+      var cur = audio.currentTime, line = ''
+      for (var i = 0; i < lrcLines.length; i++) {
+        if (lrcLines[i].t <= cur) line = lrcLines[i].text
+      }
+      if (line && lyricEl.textContent !== line) {
+        lyricEl.textContent = line
+        lyricEl.classList.remove('dsh-lyric-pop')
+        void lyricEl.offsetWidth
+        lyricEl.classList.add('dsh-lyric-pop')
+      }
+    })
 
     function play() {
       audio.play().then(function () {
