@@ -38,11 +38,14 @@
     var reward = document.createElement('div')
     reward.className = 'card-widget dsh-reward-card'
     reward.innerHTML =
-      '<div class="dsh-reward-head" onclick="this.parentNode.classList.toggle(''open'')">' +
+      '<div class="dsh-reward-head">' +
       '<i class="fas fa-mug-hot"></i><span>请寒塘喝一杯</span><i class="fas fa-angle-down dsh-reward-arrow"></i></div>' +
       '<div class="dsh-reward-body">' +
       '<img class="dsh-reward-qr" src="/blog/images/reward/alipay.jpg" alt="支付宝收款码" loading="lazy">' +
       '<div class="dsh-reward-tip">资源帮到你了？可以请我喝杯饮料 ☕</div></div>'
+    reward.querySelector('.dsh-reward-head').addEventListener('click', function () {
+      reward.classList.toggle('open')
+    })
     var sticky = aside.querySelector('.sticky_layout')
     if (sticky) {
       sticky.appendChild(wrap)
