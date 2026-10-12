@@ -1,9 +1,9 @@
 // 来访足迹 + 倒计时卡 + 阅读进度条（互不依赖，可独立删除）
 ;(function () {
   // ============ 2. 来访足迹（localStorage 记录连续/累计来访） ============
-  function visitTrack() {
+  function visitTrack(retry) {
     var aside = document.getElementById('aside-content')
-    if (!aside) return
+    if (!aside) { if (retry < 10) setTimeout(function () { visitTrack(retry + 1) }, 500); return }
     var sticky = aside.querySelector('.sticky_layout')
     var mount = sticky || aside
 
@@ -56,9 +56,9 @@
     { name: '除夕', date: '2027-02-05' }
     // ← 加倒计时照上面格式添加一行
   ]
-  function countdownCard() {
+  function countdownCard(retry) {
     var aside = document.getElementById('aside-content')
-    if (!aside) return
+    if (!aside) { if (retry < 10) setTimeout(function () { countdownCard(retry + 1) }, 500); return }
     var sticky = aside.querySelector('.sticky_layout')
     var mount = sticky || aside
     if (!DSH_COUNTDOWN.length) return
@@ -102,9 +102,9 @@
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function () {
-      visitTrack(); countdownCard(); readProgress()
+      visitTrack(0); countdownCard(0); readProgress()
     })
   } else {
-    visitTrack(); countdownCard(); readProgress()
+    visitTrack(0); countdownCard(0); readProgress()
   }
 })()
