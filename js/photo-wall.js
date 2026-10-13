@@ -136,8 +136,15 @@
     img.className = 'pw-img';
     img.alt = '';
     img.decoding = 'async';
-    /* 胶片带在横向滚动，lazy 会被判成"永不进入视口"，必须 eager */
-    img.loading = mode === 'marquee' ? 'eager' : 'lazy';
+    /* 胶片带是横向滚动，用 loading="lazy" 会被判成"永不进入视口"而不加载，
+       所以不能依赖原生 lazy。改成：先用 data-src 存着，
+       等整个胶片带滚到视口附近时再统一赋 src（见下方 lazyMarquee）。
+       这样首页首屏不会为它下载 14 张图（约 360KB）。 */
+    if (mode === 'marquee') {
+      img.setAttribute('data-src', item.thumb);
+    } else {
+      img.loading = 'lazy';
+    }
     if (item.ratio) {
       img.width = Math.round(item.ratio * 100);
       img.height = 100;
@@ -145,7 +152,7 @@
     if (item.lqip) img.style.backgroundImage = 'url("' + item.lqip + '")';
     img.addEventListener('load', function () { img.classList.add('ok'); });
     img.addEventListener('error', function () { img.classList.add('ok'); });
-    img.src = mode === 'marquee' ? item.thumb : item.full;
+    if (mode !== 'marquee') img.src = item.full;
 
     a.appendChild(img);
 
@@ -198,6 +205,7 @@
       /* 复制一份才能无缝循环（translateX -50%） */
       items.concat(items).forEach(function (it, i) { row.appendChild(card(it, i, mode)); });
       grid.appendChild(row);
+      /* 胶片带图片延迟到快滚到时再加载（首屏省 ~360KB） */
     } else {
       items.forEach(function (it, i) { grid.appendChild(card(it, i, mode)); });
     }
@@ -221,6 +229,10 @@
       mount.appendChild(wrap);
     }
 
+    /* 胶片带：等它快滚进视口时，再把 data-src 赋给 src 真正下载。
+       这样首页首屏不会为它花掉 300+ KB 带宽，滚动到那里时再加载。 */
+    if (mode === 'marquee') lazyMarquee(mount);
+
     reveal(mount);
 
     if (window.Fancybox && window.Fancybox.bind) {
@@ -234,6 +246,37 @@
 
     var cnt = mount.querySelector('.pw-count');
     if (cnt) cnt.textContent = items.length + ' 张';
+  }
+
+  /* 胶片带的图片延迟加载。
+     为什么需要：横向滚动的元素用原生 loading="lazy" 会被浏览器判成
+     "永不进入视口"而不加载；但直接 eager 又会让首页首屏多下 300+ KB。
+     折中：用 IntersectionObserver 监听整个胶片带容器，
+     它进入视口前 600px 时再统一赋 src。 */
+  function lazyMarquee(mount) {
+    var imgs = [].slice.call(mount.querySelectorAll('img[data-src]'));
+    if (!imgs.length) return;
+
+    function loadAll() {
+      imgs.forEach(function (img) {
+        if (img.getAttribute('data-src') && !img.src) {
+          img.src = img.getAttribute('data-src');
+          img.removeAttribute('data-src');
+        }
+      });
+    }
+
+    if (!('IntersectionObserver' in window)) { loadAll(); return; }
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { io.disconnect(); loadAll(); }
+      });
+    }, { rootMargin: '600px 0px' });   // 提前 600px 就开始加载，滚到时已经好了
+    io.observe(mount);
+
+    /* 兜底：4 秒后无论滚没滚到都加载，避免用户快速跳转时看到空白 */
+    setTimeout(function () { if (imgs.some(function (i) { return i.getAttribute('data-src'); })) loadAll(); }, 4000);
   }
 
   function init(mount) {
