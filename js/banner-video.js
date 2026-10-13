@@ -1,14 +1,10 @@
-// 首页顶部动态视频壁纸：立即显示 + 播放失败时兜底
+// 首页顶部动态视频壁纸：海报占位 + 进入视口才播放（省流量加速）
 (function () {
   function init() {
     var wrap = document.getElementById('site-banner-video')
     var video = wrap && wrap.querySelector('video')
     if (!wrap || !video) return
 
-    // 立即解除透明状态，避免任何事件不触发时视频被隐藏
-    wrap.classList.add('loaded')
-
-    // 播放失败时的兜底：隐藏视频层，页头显示渐变背景
     var failed = false
     function onFail() {
       if (failed) return
@@ -18,13 +14,26 @@
       if (header) header.classList.add('video-failed')
     }
     video.addEventListener('error', onFail)
-    // 8 秒内没开始播放也视为失败
-    setTimeout(function () {
-      if (video.paused && video.readyState < 3) onFail()
-    }, 8000)
 
-    var p = video.play()
-    if (p && p.catch) p.catch(onFail)
+    // 进入视口才真正开始加载和播放
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return
+          io.disconnect()
+          video.src = '/blog/images/banner/banner.mp4'
+          video.load()
+          var p = video.play()
+          if (p && p.catch) p.catch(onFail)
+        })
+      }, { threshold: 0.15 })
+      io.observe(wrap)
+      // 视频源先不设置，海报帧先顶上
+    } else {
+      video.src = '/blog/images/banner/banner.mp4'
+      var p = video.play()
+      if (p && p.catch) p.catch(onFail)
+    }
   }
 
   if (document.readyState === 'loading') {
