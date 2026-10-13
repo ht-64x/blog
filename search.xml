@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Alist+rclone 搭建自己的云盘 NAS 和影音库</title>
+    <url>/blog/posts/3223447510/</url>
+    <content><![CDATA[<p>先来说为什么要用 Alist。我自己在用的是夸克网盘，然而夸克网盘的播放器一坨，字幕识别不出来，所以没办法，只能去找找别的方法。最开始是下载下来看，但下载又有一个大问题：时间有点太长了，而且一部原盘电影差不多都要 50G 左右，没下载几个就塞满了，很难绷。然后是一天在火车上，看到了 AI 给我推荐的 Alist，于是开始尝试。</p>
+<p>试完以后，Alist 真tm是好东西啊！Alist 能帮你把网盘里的资源挂载出来，从此就不局限于网盘了。再搭配网易的爆米花，走 WebDAV，就可以直接在爆米花里看电影或者动漫，而且字幕解析流畅，还有海报墙：</p>
+<p><img src="/blog/images/posts/alist-rclone/popcorn.jpg" alt="爆米花海报墙"></p>
+<p>更重要的，Alist 并不局限于电脑，安卓端有现成的 APK 可以用，爆米花也有安卓端。另外的，夸克网盘会限制你的设备数量，但是走了 Alist 就不会有这种限制了——我可以把我的网盘登录在我对象的平板上，然后依然可以用平板上的 Alist 管理文件、看视频，真的很方便。</p>
+<p>再然后来说 rclone。爆米花固然是好的，但是这个软件有问题：不同设备走的是同一个账号的话，你的 WebDAV 也只能是一个，电脑甚至不可以填入 WebDAV，得用手机的 Alist（Alist 只要在同一局域网内就可以用）。但是我的手机用的是流量，电脑用的是校园网，就很难绷。所以电脑就要选别的影视软件了。</p>
+<p>最主流的当然是 Emby，但是实际用下来不知道为什么，Emby 的海报墙刮削有点问题，而且电视模式还需要会员！这对于我一个想躺着舒舒服服用手柄选电影看的人很不友好。于是我转向了 Kodi。Kodi 是原生的手柄操控，很棒，还可以导入皮肤插件，做成很好看的海报墙。但是 Kodi 又无法识别 WebDAV，网上主流的做法是接 Emby，然而我发现用 rclone 就可以！</p>
+<p>rclone 是什么？很简单，就是帮你把 Alist 挂载的网盘挂载成盘符，就是这样：</p>
+<p><img src="/blog/images/posts/alist-rclone/rclone-mount.png" alt="rclone 挂载成盘符"></p>
+<p>是的，这样你的夸克网盘就和本地磁盘没什么区别了，然后就可以导入 Kodi 了！这是我的 Kodi，导入了一些皮肤插件：</p>
+<p><img src="/blog/images/posts/alist-rclone/kodi-wall.jpg" alt="Kodi 海报墙"></p>
+<p>再说 rclone 还有什么好处，最直接的就是网盘里的文件可以直接从电脑里读取了。因此！可以让 AI 接手了——你可以让 AI 帮你整理网盘，还可以让 AI 读取网盘文件生成一些东西，总之很方便。</p>
+<p>关于部署 Alist+rclone，大家和自己的 Agent 聊一下就行，我这边出教程的话就没意思了，因为我的也是 DeepSeek 帮忙弄的，甚至海报墙的刮削都是 DeepSeek 搞的。然后是网盘资源，魔法出来直接谷歌搜索是可以搜出来的，我也会放一些在我的<a href="/blog/resources/">资源分享</a>里，大家可以看看。</p>
+]]></content>
+      <categories>
+        <category>数码玩机技巧</category>
+      </categories>
+      <tags>
+        <tag>Alist</tag>
+        <tag>rclone</tag>
+        <tag>影音库</tag>
+        <tag>NAS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>免费的 DeepSeek + Harness</title>
     <url>/blog/posts/334841998/</url>
     <content><![CDATA[<p>先来说一下 Harness 吧，它是 DeepSeek 官方的 Agent，主打万物插件。而且很重要的是，DeepSeek 在 Harness 的缓存命中率特别高，我实测大多数时候在 <strong>99%</strong>，速度也很快，接近 200 tok&#x2F;s。就是经常会雷霆大思考，然后烧掉你很多 token：</p>
@@ -26,32 +52,6 @@
         <tag>DeepSeek</tag>
         <tag>Harness</tag>
         <tag>WorkBuddy</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Alist+rclone 搭建自己的云盘 NAS 和影音库</title>
-    <url>/blog/posts/3223447510/</url>
-    <content><![CDATA[<p>先来说为什么要用 Alist。我自己在用的是夸克网盘，然而夸克网盘的播放器一坨，字幕识别不出来，所以没办法，只能去找找别的方法。最开始是下载下来看，但下载又有一个大问题：时间有点太长了，而且一部原盘电影差不多都要 50G 左右，没下载几个就塞满了，很难绷。然后是一天在火车上，看到了 AI 给我推荐的 Alist，于是开始尝试。</p>
-<p>试完以后，Alist 真tm是好东西啊！Alist 能帮你把网盘里的资源挂载出来，从此就不局限于网盘了。再搭配网易的爆米花，走 WebDAV，就可以直接在爆米花里看电影或者动漫，而且字幕解析流畅，还有海报墙：</p>
-<p><img src="/blog/images/posts/alist-rclone/popcorn.jpg" alt="爆米花海报墙"></p>
-<p>更重要的，Alist 并不局限于电脑，安卓端有现成的 APK 可以用，爆米花也有安卓端。另外的，夸克网盘会限制你的设备数量，但是走了 Alist 就不会有这种限制了——我可以把我的网盘登录在我对象的平板上，然后依然可以用平板上的 Alist 管理文件、看视频，真的很方便。</p>
-<p>再然后来说 rclone。爆米花固然是好的，但是这个软件有问题：不同设备走的是同一个账号的话，你的 WebDAV 也只能是一个，电脑甚至不可以填入 WebDAV，得用手机的 Alist（Alist 只要在同一局域网内就可以用）。但是我的手机用的是流量，电脑用的是校园网，就很难绷。所以电脑就要选别的影视软件了。</p>
-<p>最主流的当然是 Emby，但是实际用下来不知道为什么，Emby 的海报墙刮削有点问题，而且电视模式还需要会员！这对于我一个想躺着舒舒服服用手柄选电影看的人很不友好。于是我转向了 Kodi。Kodi 是原生的手柄操控，很棒，还可以导入皮肤插件，做成很好看的海报墙。但是 Kodi 又无法识别 WebDAV，网上主流的做法是接 Emby，然而我发现用 rclone 就可以！</p>
-<p>rclone 是什么？很简单，就是帮你把 Alist 挂载的网盘挂载成盘符，就是这样：</p>
-<p><img src="/blog/images/posts/alist-rclone/rclone-mount.png" alt="rclone 挂载成盘符"></p>
-<p>是的，这样你的夸克网盘就和本地磁盘没什么区别了，然后就可以导入 Kodi 了！这是我的 Kodi，导入了一些皮肤插件：</p>
-<p><img src="/blog/images/posts/alist-rclone/kodi-wall.jpg" alt="Kodi 海报墙"></p>
-<p>再说 rclone 还有什么好处，最直接的就是网盘里的文件可以直接从电脑里读取了。因此！可以让 AI 接手了——你可以让 AI 帮你整理网盘，还可以让 AI 读取网盘文件生成一些东西，总之很方便。</p>
-<p>关于部署 Alist+rclone，大家和自己的 Agent 聊一下就行，我这边出教程的话就没意思了，因为我的也是 DeepSeek 帮忙弄的，甚至海报墙的刮削都是 DeepSeek 搞的。然后是网盘资源，魔法出来直接谷歌搜索是可以搜出来的，我也会放一些在我的<a href="/blog/resources/">资源分享</a>里，大家可以看看。</p>
-]]></content>
-      <categories>
-        <category>数码玩机技巧</category>
-      </categories>
-      <tags>
-        <tag>Alist</tag>
-        <tag>rclone</tag>
-        <tag>影音库</tag>
-        <tag>NAS</tag>
       </tags>
   </entry>
   <entry>
