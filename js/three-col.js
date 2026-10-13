@@ -20,25 +20,25 @@
   'use strict';
 
   /* ---------- 卡片归属配置 ----------
-     调整卡片去哪一列，只改这里。选择器先相对 #aside-content 找，
-     找不到再全局找（音乐播放器挂在 body 下）。
+     调整卡片去哪一列、以及列内顺序，只改这里。
+     数组顺序 = 该列从上到下的顺序（先写的在上面）。
+     选择器先相对 #aside-content 找，找不到再全局找（音乐播放器挂在 body 下）。
 
-     分配原则：左右两列高度尽量接近，且都接近中列（文章）的高度。
-     当前实测（1440px）：左 ≈ 1000px，右 ≈ 1050px，中列 ≈ 1570px。 */
+     分配原则：左右两列高度尽量接近，且都接近中列（文章）的高度。 */
   var COLUMNS = {
     left: [
-      '#dsh-music',                     // 音乐播放器（常驻卡片，不再是浮层）
       '.card-info',                     // 头像 / 作者卡
+      '#dsh-music',                     // 音乐播放器（紧跟在头像卡下面）
       '.dsh-clock-card',                // 现在时间
-      '.dsh-quote-card',                // 每日一言
       '.dsh-visit-card',                // 来访足迹
-      '.dsh-countdown-card',            // 倒计时
-      '.dsh-reward-card'                // 打赏卡
+      '.dsh-countdown-card'             // 倒计时
     ],
     right: [
       '.card-announcement',             // 公告
-      '.card-recent-post',              // 最新文章
+      '.dsh-quote-card',                // 每日一言
+      '.dsh-reward-card',               // 赞助 / 打赏卡
       '.dsh-interactive-card',          // 玩一玩
+      '.card-recent-post',              // 最新文章
       '.card-webinfo'                   // 网站信息
     ]
   };
@@ -47,11 +47,16 @@
     return (root && root.querySelector(sel)) || document.querySelector(sel);
   }
 
-  /* 把 el 挪到 target 下（已在 target 里就跳过） */
-  function moveTo(el, target) {
+  /* 把 el 按 slot 顺序放进 target。
+     slot = 该卡片在 COLUMNS 数组里的下标，用来保证列内顺序与配置一致
+     （不能简单 appendChild，否则"播放器放在头像下面"这种要求做不到）。 */
+  function placeAt(el, target, slot) {
     if (!el || !target) return false;
-    if (el.parentElement === target) return false;
-    target.appendChild(el);
+    /* 目标位置：跳过已在列里的元素，找到第 slot 个之前插入 */
+    var kids = Array.prototype.filter.call(target.children, function (k) { return k !== el; });
+    var ref = kids[slot] || null;
+    if (el.parentElement === target && el.nextElementSibling === ref) return false;
+    target.insertBefore(el, ref);
     return true;
   }
 
@@ -84,22 +89,25 @@
       aside.appendChild(colR);
     }
 
-    /* 2. 按配置分配（每次调用都重新扫一遍，新卡片会被补进去） */
+    /* 2. 按配置分配（每次调用都重新扫一遍，新卡片会被补进去）。
+          slot 用数组下标，保证列内顺序与 COLUMNS 里写的一致。 */
     var placed = [];
     var assign = function (sels, target) {
+      var slot = 0;
       sels.forEach(function (sel) {
         var el = find(aside, sel);
-        if (!el || placed.indexOf(el) > -1) return;
+        if (!el || placed.indexOf(el) > -1) { slot++; return; }
         /* 只处理卡片本体，别把列容器自己搬进去 */
-        if (el === colL || el === colR) return;
+        if (el === colL || el === colR) { slot++; return; }
         placed.push(el);
-        moveTo(el, target);
+        placeAt(el, target, slot);
+        slot++;
       });
     };
     assign(COLUMNS.left, colL);
     assign(COLUMNS.right, colR);
 
-    /* 3. 兜底：侧栏里剩下的孤儿卡片进右列，保证不丢
+    /* 3. 兜底：侧栏里剩下的孤儿卡片追加到右列末尾，保证不丢
           （.sticky_layout / #dsh-widgets 是包装容器，递归进去看） */
     var scan = function (parent) {
       Array.prototype.slice.call(parent.children).forEach(function (el) {
@@ -108,7 +116,7 @@
         if (isWrapper) { scan(el); return; }
         if (placed.indexOf(el) > -1) return;
         placed.push(el);
-        moveTo(el, colR);
+        colR.appendChild(el);
       });
     };
     scan(aside);
