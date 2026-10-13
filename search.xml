@@ -1,6 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>免费的 DeepSeek + Harness</title>
+    <url>/blog/posts/334841998/</url>
+    <content><![CDATA[<p>先来说一下 Harness 吧，它是 DeepSeek 官方的 Agent，主打万物插件。而且很重要的是，DeepSeek 在 Harness 的缓存命中率特别高，我实测大多数时候在 <strong>99%</strong>，速度也很快，接近 200 tok&#x2F;s。就是经常会雷霆大思考，然后烧掉你很多 token：</p>
+<p><img src="/blog/images/posts/free-deepseek-harness/harness-stats.png" alt="Harness 缓存命中率与速度"></p>
+<p>那有没有什么便宜好用的方法，让你白嫖 Harness 呢？</p>
+<p>有的兄弟，有的。</p>
+<p>不过说到这里，我们需要先来说 WorkBuddy。作为财大气粗的腾讯的 Agent，WorkBuddy 现在会送非常多积分，正常使用的话已经是绰绰有余了。但很难受的是，任何模型接入 WorkBuddy 都会经历两个问题：<strong>1，连接速度太慢；2，AI 明显变蠢了。</strong> WorkBuddy 的内置提示词似乎过于冗余，让 AI 变得笨笨的。</p>
+<p>那么问题来了——如果我们能把 WorkBuddy 的免费额度接入 Harness，是不是就可以解决 AI 变笨的问题呢？</p>
+<p><img src="/blog/images/posts/free-deepseek-harness/workbuddy-home.jpg" alt="WorkBuddy 主页"></p>
+<p>不得不说，腾讯做的 AI 审美是真差（）</p>
+<p><img src="/blog/images/posts/free-deepseek-harness/model-list.png" alt="模型选择列表"></p>
+<p>那么，怎么把 WorkBuddy 的额度给 Harness 用呢？这就是我要说的插件——<strong>dsh-codearts-auth</strong>。这个插件能够把各种 AI 平台的额度接到你的 Harness 上用：</p>
+<p><img src="/blog/images/posts/free-deepseek-harness/auth-plugin.png" alt="dsh-codearts-auth 插件界面"></p>
+<p>如图所示，还能把各种平台的额度薅过来。不过好像有封号的风险，emmmmm，大不了重新注册一个呗。</p>
+<p>另外说一句：WorkBuddy 中国版会免费送积分；而国际版则是 DeepSeek V4.1 Flash 免费用，也可以接入 Harness，不过封号风险好像更大一些。</p>
+<p>至于 Harness 里的各种插件，我自己还没太多研究就不推荐啦。大家不知道用什么的话，不妨直接跟 AI 说，让它自己选它用得到的。</p>
+]]></content>
+      <categories>
+        <category>数码玩机技巧</category>
+      </categories>
+      <tags>
+        <tag>Agent</tag>
+        <tag>DeepSeek</tag>
+        <tag>Harness</tag>
+        <tag>WorkBuddy</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Alist+rclone 搭建自己的云盘 NAS 和影音库</title>
     <url>/blog/posts/3223447510/</url>
     <content><![CDATA[<p>先来说为什么要用 Alist。我自己在用的是夸克网盘，然而夸克网盘的播放器一坨，字幕识别不出来，所以没办法，只能去找找别的方法。最开始是下载下来看，但下载又有一个大问题：时间有点太长了，而且一部原盘电影差不多都要 50G 左右，没下载几个就塞满了，很难绷。然后是一天在火车上，看到了 AI 给我推荐的 Alist，于是开始尝试。</p>
@@ -47,49 +75,6 @@
       </tags>
   </entry>
   <entry>
-    <title>免费的 DeepSeek + Harness</title>
-    <url>/blog/posts/334841998/</url>
-    <content><![CDATA[<p>先来说一下 Harness 吧，它是 DeepSeek 官方的 Agent，主打万物插件。而且很重要的是，DeepSeek 在 Harness 的缓存命中率特别高，我实测大多数时候在 <strong>99%</strong>，速度也很快，接近 200 tok&#x2F;s。就是经常会雷霆大思考，然后烧掉你很多 token：</p>
-<p><img src="/blog/images/posts/free-deepseek-harness/harness-stats.png" alt="Harness 缓存命中率与速度"></p>
-<p>那有没有什么便宜好用的方法，让你白嫖 Harness 呢？</p>
-<p>有的兄弟，有的。</p>
-<p>不过说到这里，我们需要先来说 WorkBuddy。作为财大气粗的腾讯的 Agent，WorkBuddy 现在会送非常多积分，正常使用的话已经是绰绰有余了。但很难受的是，任何模型接入 WorkBuddy 都会经历两个问题：<strong>1，连接速度太慢；2，AI 明显变蠢了。</strong> WorkBuddy 的内置提示词似乎过于冗余，让 AI 变得笨笨的。</p>
-<p>那么问题来了——如果我们能把 WorkBuddy 的免费额度接入 Harness，是不是就可以解决 AI 变笨的问题呢？</p>
-<p><img src="/blog/images/posts/free-deepseek-harness/workbuddy-home.jpg" alt="WorkBuddy 主页"></p>
-<p>不得不说，腾讯做的 AI 审美是真差（）</p>
-<p><img src="/blog/images/posts/free-deepseek-harness/model-list.png" alt="模型选择列表"></p>
-<p>那么，怎么把 WorkBuddy 的额度给 Harness 用呢？这就是我要说的插件——<strong>dsh-codearts-auth</strong>。这个插件能够把各种 AI 平台的额度接到你的 Harness 上用：</p>
-<p><img src="/blog/images/posts/free-deepseek-harness/auth-plugin.png" alt="dsh-codearts-auth 插件界面"></p>
-<p>如图所示，还能把各种平台的额度薅过来。不过好像有封号的风险，emmmmm，大不了重新注册一个呗。</p>
-<p>另外说一句：WorkBuddy 中国版会免费送积分；而国际版则是 DeepSeek V4.1 Flash 免费用，也可以接入 Harness，不过封号风险好像更大一些。</p>
-<p>至于 Harness 里的各种插件，我自己还没太多研究就不推荐啦。大家不知道用什么的话，不妨直接跟 AI 说，让它自己选它用得到的。</p>
-]]></content>
-      <categories>
-        <category>数码玩机技巧</category>
-      </categories>
-      <tags>
-        <tag>Agent</tag>
-        <tag>DeepSeek</tag>
-        <tag>Harness</tag>
-        <tag>WorkBuddy</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>博客开张啦</title>
-    <url>/blog/posts/391625834/</url>
-    <content><![CDATA[<p>博客正式开张！</p>
-<p>这里是寒塘的小角落，会记录日常、分享玩机技巧、健身心得和好用的资源。</p>
-<p>页面顶部可以逛<strong>画廊</strong>和<strong>资源分享</strong>，右下角有桌宠陪伴，左下角……哦不，现在播放器在右边栏里 🎵</p>
-<p>慢慢写，慢慢填。</p>
-]]></content>
-      <categories>
-        <category>个人日记</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>所有人都应该试试 Agent</title>
     <url>/blog/posts/3060075407/</url>
     <content><![CDATA[<p>是的，所有人。并不是说不是计算机专业、不是码农就不去尝试 Agent，我建议所有人都去试试。它会极大地改变你对 AI 的看法，也会让你知道为什么说 AI 是第四次科技革命、会带来大量失业潮，同时也会告诉你 AI 到底带来了什么样的机会，带来了多大的生产力提升。</p>
@@ -112,8 +97,23 @@
       </categories>
       <tags>
         <tag>Agent</tag>
-        <tag>随笔</tag>
         <tag>AI</tag>
+        <tag>随笔</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>博客开张啦</title>
+    <url>/blog/posts/391625834/</url>
+    <content><![CDATA[<p>博客正式开张！</p>
+<p>这里是寒塘的小角落，会记录日常、分享玩机技巧、健身心得和好用的资源。</p>
+<p>页面顶部可以逛<strong>画廊</strong>和<strong>资源分享</strong>，右下角有桌宠陪伴，左下角……哦不，现在播放器在右边栏里 🎵</p>
+<p>慢慢写，慢慢填。</p>
+]]></content>
+      <categories>
+        <category>个人日记</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
       </tags>
   </entry>
 </search>

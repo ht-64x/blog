@@ -29,12 +29,10 @@
       '<button class="dsh-music-play" title="播放/暂停"><i class="fas fa-play"></i></button>' +
       '<button class="dsh-music-next" title="下一首"><i class="fas fa-step-forward"></i></button>' +
       '</div>'
-    var aside = document.getElementById('aside-content')
-    if (aside) {
-      aside.insertBefore(player, aside.firstChild)
-    } else {
-      document.body.appendChild(player)
-    }
+    /* 播放器是 position:fixed 的浮层（左下角），挂到 body 上。
+       之前插在 #aside-content 里，会让它成为一个 grid/flex 子项，
+       在首页三列布局下会多撑出一行、把右列卡片挤下去。 */
+    document.body.appendChild(player)
 
     var audio = new Audio()
     audio.preload = 'none'
