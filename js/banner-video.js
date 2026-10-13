@@ -28,7 +28,7 @@
           video.src = '/blog/images/banner/banner.mp4'
           video.load()
           var p = video.play()
-          if (p && p.catch) p.catch(onFail)
+          if (p && p.catch) p.catch(function () { /* 缓冲中，等待 playing 事件 */ })
         })
       }, { threshold: 0.15 })
       io.observe(wrap)
