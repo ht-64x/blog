@@ -2,6 +2,60 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://ht-64x.github.io/blog/gallery/index.html</loc>
+    
+    <lastmod>2026-10-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://ht-64x.github.io/blog/gallery/game/index.html</loc>
+    
+    <lastmod>2026-10-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://ht-64x.github.io/blog/gallery/life/index.html</loc>
+    
+    <lastmod>2026-10-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://ht-64x.github.io/blog/images/gallery/manifest.json</loc>
+    
+    <lastmod>2026-10-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://ht-64x.github.io/blog/about/index.html</loc>
+    
+    <lastmod>2026-10-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://ht-64x.github.io/blog/images/life/manifest.json</loc>
+    
+    <lastmod>2026-10-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://ht-64x.github.io/blog/posts/334841998/</loc>
     
     <lastmod>2026-10-13</lastmod>
@@ -14,15 +68,6 @@
     <loc>https://ht-64x.github.io/blog/resources/index.html</loc>
     
     <lastmod>2026-10-12</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://ht-64x.github.io/blog/about/index.html</loc>
-    
-    <lastmod>2026-10-11</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -65,7 +110,7 @@
   </url>
   
   <url>
-    <loc>https://ht-64x.github.io/blog/gallery/index.html</loc>
+    <loc>https://ht-64x.github.io/blog/gallery/wallpaper/index.html</loc>
     
     <lastmod>2026-10-11</lastmod>
     
@@ -84,24 +129,6 @@
   
   <url>
     <loc>https://ht-64x.github.io/blog/categories/index.html</loc>
-    
-    <lastmod>2026-10-10</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://ht-64x.github.io/blog/gallery/illustration/index.html</loc>
-    
-    <lastmod>2026-10-10</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://ht-64x.github.io/blog/gallery/game-screenshot/index.html</loc>
     
     <lastmod>2026-10-10</lastmod>
     
@@ -147,42 +174,7 @@
   </url>
   
   <url>
-    <loc>https://ht-64x.github.io/blog/tags/%E4%B8%B2%E6%B5%81/</loc>
-    <lastmod>2026-10-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://ht-64x.github.io/blog/tags/UU%E8%BF%9C%E7%A8%8B/</loc>
-    <lastmod>2026-10-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://ht-64x.github.io/blog/tags/%E5%B9%B3%E6%9D%BF/</loc>
-    <lastmod>2026-10-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://ht-64x.github.io/blog/tags/Agent/</loc>
-    <lastmod>2026-10-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://ht-64x.github.io/blog/tags/AI/</loc>
-    <lastmod>2026-10-13</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://ht-64x.github.io/blog/tags/%E9%9A%8F%E7%AC%94/</loc>
     <lastmod>2026-10-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -204,6 +196,41 @@
   
   <url>
     <loc>https://ht-64x.github.io/blog/tags/WorkBuddy/</loc>
+    <lastmod>2026-10-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://ht-64x.github.io/blog/tags/%E9%9A%8F%E7%AC%94/</loc>
+    <lastmod>2026-10-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://ht-64x.github.io/blog/tags/%E4%B8%B2%E6%B5%81/</loc>
+    <lastmod>2026-10-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://ht-64x.github.io/blog/tags/UU%E8%BF%9C%E7%A8%8B/</loc>
+    <lastmod>2026-10-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://ht-64x.github.io/blog/tags/%E5%B9%B3%E6%9D%BF/</loc>
+    <lastmod>2026-10-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://ht-64x.github.io/blog/tags/AI/</loc>
     <lastmod>2026-10-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
