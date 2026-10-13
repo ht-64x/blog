@@ -1,0 +1,1 @@
+import{t as e}from"./index-BLUyYvSY.js";function t(t,n,r){t.innerHTML=n.map(t=>`<button class="pad-btn${t.variant?` ${t.variant}`:``}" data-pad="${e(t.id)}" aria-label="${e(t.aria)}">${e(t.label)}</button>`).join(``),t.querySelectorAll(`[data-pad]`).forEach(e=>{e.addEventListener(`click`,()=>{e.blur(),r(e.dataset.pad)})})}export{t};

@@ -1,0 +1,1 @@
+function e(e,t){return String(Math.max(0,Math.floor(e))).padStart(t,`0`)}var t={easy:`EASY`,medium:`MEDIUM`,hard:`HARD`};export{e as n,t};

@@ -1,0 +1,1 @@
+var e={ground:`#1a1410`,teal:`#2ee6c8`,gold:`#ffc93c`,pink:`#ff5c9e`,orange:`#ff8c42`,white:`#fffaf0`,mono:`'JetBrains Mono', ui-monospace, monospace`,glow:{teal:`rgba(46, 230, 200, .5)`,gold:`rgba(255, 201, 60, .5)`,pink:`rgba(255, 92, 158, .5)`,orange:`rgba(255, 140, 66, .5)`,white:`rgba(255, 250, 240, .8)`}};export{e as t};
