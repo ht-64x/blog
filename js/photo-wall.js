@@ -54,12 +54,14 @@
         return r.json();
       })
       .then(function (list) {
-        return list.map(function (it) {
+        return list.map(function (it, i) {
           return {
             full: cfg.full(it),
             thumb: cfg.thumb(it),
             ratio: it.ratio || (it.w && it.h ? it.w / it.h : 1.5),
-            lqip: it.lqip || ''
+            lqip: it.lqip || '',
+            /* 编号取清单里的序号，与照片一一对应，不随洗牌变化 */
+            no: i + 1
           };
         });
       });
@@ -146,6 +148,24 @@
     img.src = mode === 'marquee' ? item.thumb : item.full;
 
     a.appendChild(img);
+
+    /* 拍立得：照片下方加编号，四角加护角花边。
+       不写日期——这些照片没有可靠的拍摄时间（EXIF 为空，文件名是批量导出时间戳）。 */
+    if (mode === 'polaroid') {
+      var cap = document.createElement('span');
+      cap.className = 'pw-no';
+      cap.setAttribute('aria-hidden', 'true');
+      cap.textContent = 'NO.' + (item.no < 10 ? '0' + item.no : item.no);
+      a.appendChild(cap);
+
+      ['tl', 'tr', 'bl', 'br'].forEach(function (pos) {
+        var c = document.createElement('span');
+        c.className = 'pw-corner ' + pos;
+        c.setAttribute('aria-hidden', 'true');
+        a.appendChild(c);
+      });
+    }
+
     d.appendChild(a);
     return d;
   }
