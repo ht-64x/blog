@@ -27,21 +27,6 @@
       </tags>
   </entry>
   <entry>
-    <title>博客开张啦</title>
-    <url>/blog/posts/391625834/</url>
-    <content><![CDATA[<p>博客正式开张！</p>
-<p>这里是寒塘的小角落，会记录日常、分享玩机技巧、健身心得和好用的资源。</p>
-<p>页面顶部可以逛<strong>画廊</strong>和<strong>资源分享</strong>，右下角有桌宠陪伴，左下角……哦不，现在播放器在右边栏里 🎵</p>
-<p>慢慢写，慢慢填。</p>
-]]></content>
-      <categories>
-        <category>个人日记</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>关于串流</title>
     <url>/blog/posts/2217363806/</url>
     <content><![CDATA[<p>最早了解到串流是从 Steam Link 了解到的，也有试着用过，但是使用效果很差，延迟很高而且需要 Steam 常驻启动，总之不是什么很好的选择。然后我又去找了别的串流软件。</p>
@@ -83,9 +68,24 @@
         <category>数码玩机技巧</category>
       </categories>
       <tags>
-        <tag>随笔</tag>
         <tag>Agent</tag>
         <tag>AI</tag>
+        <tag>随笔</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>博客开张啦</title>
+    <url>/blog/posts/391625834/</url>
+    <content><![CDATA[<p>博客正式开张！</p>
+<p>这里是寒塘的小角落，会记录日常、分享玩机技巧、健身心得和好用的资源。</p>
+<p>页面顶部可以逛<strong>画廊</strong>和<strong>资源分享</strong>，右下角有桌宠陪伴，左下角……哦不，现在播放器在右边栏里 🎵</p>
+<p>慢慢写，慢慢填。</p>
+]]></content>
+      <categories>
+        <category>个人日记</category>
+      </categories>
+      <tags>
+        <tag>随笔</tag>
       </tags>
   </entry>
   <entry>

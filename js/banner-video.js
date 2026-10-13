@@ -21,6 +21,10 @@
         entries.forEach(function (entry) {
           if (!entry.isIntersecting) return
           io.disconnect()
+          video.addEventListener('playing', function () {
+            wrap.classList.add('loaded')
+            video.classList.add('playing')
+          }, { once: true })
           video.src = '/blog/images/banner/banner.mp4'
           video.load()
           var p = video.play()
