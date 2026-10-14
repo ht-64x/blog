@@ -235,11 +235,14 @@
 
     reveal(mount);
 
-    if (window.Fancybox && window.Fancybox.bind) {
-      window.Fancybox.bind('[data-fancybox="pwall-' + mode + '"]', {
-        hideScrollbar: false,
-        Toolbar: { display: ['zoom', 'fullscreen', 'close'] }
-      });
+    /* 灯箱：统一走 lightbox.js 的增强配置（中文界面 + 左右切换 + 缩略图导航）。
+       不再各自写一套配置，避免「有的场景没中文、有的不能左右切换」。 */
+    var group = '[data-fancybox="pwall-' + mode + '"]';
+    if (window.DSH_LIGHTBOX && window.DSH_LIGHTBOX.bind) {
+      window.DSH_LIGHTBOX.bind(group);
+    } else if (window.Fancybox && window.Fancybox.bind) {
+      // 兜底：lightbox.js 没加载时用基础配置，至少能放大
+      window.Fancybox.bind(group, { hideScrollbar: false });
     } else if (window.mediumZoom) {
       window.mediumZoom('[data-pwall] .pw-img');
     }
