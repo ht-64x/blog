@@ -1,6 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>免费的 DeepSeek + Harness</title>
+    <url>/blog/posts/334841998/</url>
+    <content><![CDATA[<p>先来说一下 Harness 吧，它是 DeepSeek 官方的 Agent，主打万物插件。而且很重要的是，DeepSeek 在 Harness 的缓存命中率特别高，我实测大多数时候在 <strong>99%</strong>，速度也很快，接近 200 tok&#x2F;s。就是经常会雷霆大思考，然后烧掉你很多 token：</p>
+<p><img src="/blog/images/posts/free-deepseek-harness/harness-stats.webp" alt="Harness 缓存命中率与速度"></p>
+<p>那有没有什么便宜好用的方法，让你白嫖 Harness 呢？</p>
+<p>有的兄弟，有的。</p>
+<p>不过说到这里，我们需要先来说 WorkBuddy。作为财大气粗的腾讯的 Agent，WorkBuddy 现在会送非常多积分，正常使用的话已经是绰绰有余了。但很难受的是，任何模型接入 WorkBuddy 都会经历两个问题：<strong>1，连接速度太慢；2，AI 明显变蠢了。</strong> WorkBuddy 的内置提示词似乎过于冗余，让 AI 变得笨笨的。</p>
+<p>那么问题来了——如果我们能把 WorkBuddy 的免费额度接入 Harness，是不是就可以解决 AI 变笨的问题呢？</p>
+<p><img src="/blog/images/posts/free-deepseek-harness/workbuddy-home.jpg" alt="WorkBuddy 主页"></p>
+<p>不得不说，腾讯做的 AI 审美是真差（）</p>
+<p><img src="/blog/images/posts/free-deepseek-harness/model-list.png" alt="模型选择列表"></p>
+<p>那么，怎么把 WorkBuddy 的额度给 Harness 用呢？这就是我要说的插件——<strong>dsh-codearts-auth</strong>。这个插件能够把各种 AI 平台的额度接到你的 Harness 上用：</p>
+<p><img src="/blog/images/posts/free-deepseek-harness/auth-plugin.png" alt="dsh-codearts-auth 插件界面"></p>
+<p>如图所示，还能把各种平台的额度薅过来。不过好像有封号的风险，emmmmm，大不了重新注册一个呗。</p>
+<p>另外说一句：WorkBuddy 中国版会免费送积分；而国际版则是 DeepSeek V4.1 Flash 免费用，也可以接入 Harness，不过封号风险好像更大一些。</p>
+<p>至于 Harness 里的各种插件，我自己还没太多研究就不推荐啦。大家不知道用什么的话，不妨直接跟 AI 说，让它自己选它用得到的。</p>
+]]></content>
+      <categories>
+        <category>数码玩机技巧</category>
+      </categories>
+      <tags>
+        <tag>Agent</tag>
+        <tag>DeepSeek</tag>
+        <tag>Harness</tag>
+        <tag>WorkBuddy</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Alist+rclone 搭建自己的云盘 NAS 和影音库</title>
     <url>/blog/posts/3223447510/</url>
     <content><![CDATA[<p>先来说为什么要用 Alist。我自己在用的是夸克网盘，然而夸克网盘的播放器一坨，字幕识别不出来，所以没办法，只能去找找别的方法。最开始是下载下来看，但下载又有一个大问题：时间有点太长了，而且一部原盘电影差不多都要 50G 左右，没下载几个就塞满了，很难绷。然后是一天在火车上，看到了 AI 给我推荐的 Alist，于是开始尝试。</p>
@@ -24,26 +52,6 @@
         <tag>rclone</tag>
         <tag>影音库</tag>
         <tag>NAS</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>关于串流</title>
-    <url>/blog/posts/2217363806/</url>
-    <content><![CDATA[<p>最早了解到串流是从 Steam Link 了解到的，也有试着用过，但是使用效果很差，延迟很高而且需要 Steam 常驻启动，总之不是什么很好的选择。然后我又去找了别的串流软件。</p>
-<p>先来说说为什么要串流吧！首先是校园网串流有着得天独厚的优势——校园网是公网，而且上传很高，真的超级高。。。那么基于这个其实我们就可以搞很多花样。例如我可以把电脑放在宿舍，然后出门在外只带一个平板，这样我就可以相当于带一个轻薄本出门，或者可以在外边完成我没有干完的活。或者我也可以给我的手机配一个拉伸手柄然后拿来当掌机玩，但实际上延迟有点高（）。总之串流是一个很不错的东西，借助于校园网的优势，我们可以省去内网穿透或者申请公网 IP 的麻烦——校园网就是公网。另外的，如果你的主板支持网络唤醒，你甚至可以通过软件对你的电脑进行远程唤醒然后游玩，maybe 你回家都可以不带电脑。但是笔记本电脑绝大多数不支持这种东西，我建议还是物理唤醒，没错，给你的舍友发个消息。</p>
-<p>再来说串流软件的选择。我们前面说了 Steam Link 效果不好，那有什么好的呢？网络上推荐你的大多数是 Moonlight + Sunshine 这对开源组合，但是实际上这两个东西配置比较麻烦，实测下来延迟也不低。那主播主播有没有更简单高效的方法？有的兄弟，有的。网易给了我们最一针见血、最通俗、最不绕弯子的软件——<strong>UU 远程</strong>。</p>
-<p>这个软件真的很好。首先极其无脑的设计，只要两边都安装了 UU 就已经配置好了。再来说功能，UU 远程真的提供了超级多的功能：首先是画质和帧率的选择，能让你选择更适合你的网络环境的方式；然后是平板触控方式，可以让你的 Windows 电脑变成 Surface（Win 平板）一样的操作逻辑；还可调节分辨率，开超级屏，直接铺满你的 21:9 的手机屏；还有缩放，不至于屏幕太小看不清字。还有很多很多功能：观看模式、副屏模式、防窥模式、指纹解锁 Windows、快速传文件、远程开关机、远程终端、快捷软件……真的，UU 远程就是版本答案。最重要的是它免费！！！至于什么时候收费官方还没有声明，大家先好好用。</p>
-<p><img src="/blog/images/posts/streaming-post/uu-remote-tablet.jpg" alt="平板串流写稿"></p>
-<p><img src="/blog/images/posts/streaming-post/uu-remote-phone.jpg" alt="手机端 UU 远程界面"></p>
-<p>这个东西，下载很快很方便，你一定要试试！</p>
-]]></content>
-      <categories>
-        <category>数码玩机技巧</category>
-      </categories>
-      <tags>
-        <tag>串流</tag>
-        <tag>UU远程</tag>
-        <tag>平板</tag>
       </tags>
   </entry>
   <entry>
@@ -83,37 +91,363 @@
         <category>数码玩机技巧</category>
       </categories>
       <tags>
-        <tag>随笔</tag>
         <tag>Agent</tag>
+        <tag>随笔</tag>
         <tag>AI</tag>
       </tags>
   </entry>
   <entry>
-    <title>免费的 DeepSeek + Harness</title>
-    <url>/blog/posts/334841998/</url>
-    <content><![CDATA[<p>先来说一下 Harness 吧，它是 DeepSeek 官方的 Agent，主打万物插件。而且很重要的是，DeepSeek 在 Harness 的缓存命中率特别高，我实测大多数时候在 <strong>99%</strong>，速度也很快，接近 200 tok&#x2F;s。就是经常会雷霆大思考，然后烧掉你很多 token：</p>
-<p><img src="/blog/images/posts/free-deepseek-harness/harness-stats.webp" alt="Harness 缓存命中率与速度"></p>
-<p>那有没有什么便宜好用的方法，让你白嫖 Harness 呢？</p>
-<p>有的兄弟，有的。</p>
-<p>不过说到这里，我们需要先来说 WorkBuddy。作为财大气粗的腾讯的 Agent，WorkBuddy 现在会送非常多积分，正常使用的话已经是绰绰有余了。但很难受的是，任何模型接入 WorkBuddy 都会经历两个问题：<strong>1，连接速度太慢；2，AI 明显变蠢了。</strong> WorkBuddy 的内置提示词似乎过于冗余，让 AI 变得笨笨的。</p>
-<p>那么问题来了——如果我们能把 WorkBuddy 的免费额度接入 Harness，是不是就可以解决 AI 变笨的问题呢？</p>
-<p><img src="/blog/images/posts/free-deepseek-harness/workbuddy-home.jpg" alt="WorkBuddy 主页"></p>
-<p>不得不说，腾讯做的 AI 审美是真差（）</p>
-<p><img src="/blog/images/posts/free-deepseek-harness/model-list.png" alt="模型选择列表"></p>
-<p>那么，怎么把 WorkBuddy 的额度给 Harness 用呢？这就是我要说的插件——<strong>dsh-codearts-auth</strong>。这个插件能够把各种 AI 平台的额度接到你的 Harness 上用：</p>
-<p><img src="/blog/images/posts/free-deepseek-harness/auth-plugin.png" alt="dsh-codearts-auth 插件界面"></p>
-<p>如图所示，还能把各种平台的额度薅过来。不过好像有封号的风险，emmmmm，大不了重新注册一个呗。</p>
-<p>另外说一句：WorkBuddy 中国版会免费送积分；而国际版则是 DeepSeek V4.1 Flash 免费用，也可以接入 Harness，不过封号风险好像更大一些。</p>
-<p>至于 Harness 里的各种插件，我自己还没太多研究就不推荐啦。大家不知道用什么的话，不妨直接跟 AI 说，让它自己选它用得到的。</p>
+    <title>关于串流</title>
+    <url>/blog/posts/2217363806/</url>
+    <content><![CDATA[<p>最早了解到串流是从 Steam Link 了解到的，也有试着用过，但是使用效果很差，延迟很高而且需要 Steam 常驻启动，总之不是什么很好的选择。然后我又去找了别的串流软件。</p>
+<p>先来说说为什么要串流吧！首先是校园网串流有着得天独厚的优势——校园网是公网，而且上传很高，真的超级高。。。那么基于这个其实我们就可以搞很多花样。例如我可以把电脑放在宿舍，然后出门在外只带一个平板，这样我就可以相当于带一个轻薄本出门，或者可以在外边完成我没有干完的活。或者我也可以给我的手机配一个拉伸手柄然后拿来当掌机玩，但实际上延迟有点高（）。总之串流是一个很不错的东西，借助于校园网的优势，我们可以省去内网穿透或者申请公网 IP 的麻烦——校园网就是公网。另外的，如果你的主板支持网络唤醒，你甚至可以通过软件对你的电脑进行远程唤醒然后游玩，maybe 你回家都可以不带电脑。但是笔记本电脑绝大多数不支持这种东西，我建议还是物理唤醒，没错，给你的舍友发个消息。</p>
+<p>再来说串流软件的选择。我们前面说了 Steam Link 效果不好，那有什么好的呢？网络上推荐你的大多数是 Moonlight + Sunshine 这对开源组合，但是实际上这两个东西配置比较麻烦，实测下来延迟也不低。那主播主播有没有更简单高效的方法？有的兄弟，有的。网易给了我们最一针见血、最通俗、最不绕弯子的软件——<strong>UU 远程</strong>。</p>
+<p>这个软件真的很好。首先极其无脑的设计，只要两边都安装了 UU 就已经配置好了。再来说功能，UU 远程真的提供了超级多的功能：首先是画质和帧率的选择，能让你选择更适合你的网络环境的方式；然后是平板触控方式，可以让你的 Windows 电脑变成 Surface（Win 平板）一样的操作逻辑；还可调节分辨率，开超级屏，直接铺满你的 21:9 的手机屏；还有缩放，不至于屏幕太小看不清字。还有很多很多功能：观看模式、副屏模式、防窥模式、指纹解锁 Windows、快速传文件、远程开关机、远程终端、快捷软件……真的，UU 远程就是版本答案。最重要的是它免费！！！至于什么时候收费官方还没有声明，大家先好好用。</p>
+<p><img src="/blog/images/posts/streaming-post/uu-remote-tablet.jpg" alt="平板串流写稿"></p>
+<p><img src="/blog/images/posts/streaming-post/uu-remote-phone.jpg" alt="手机端 UU 远程界面"></p>
+<p>这个东西，下载很快很方便，你一定要试试！</p>
 ]]></content>
       <categories>
         <category>数码玩机技巧</category>
       </categories>
       <tags>
-        <tag>Agent</tag>
-        <tag>DeepSeek</tag>
-        <tag>Harness</tag>
-        <tag>WorkBuddy</tag>
+        <tag>串流</tag>
+        <tag>UU远程</tag>
+        <tag>平板</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MusicFree：一个插件化的免费音乐播放器</title>
+    <url>/blog/posts/1987456320/</url>
+    <content><![CDATA[<h2 id="它是什么"><a href="#它是什么" class="headerlink" title="它是什么"></a>它是什么</h2><p><strong>MusicFree</strong> 是一个开源的音乐播放器，作者是 <a href="https://github.com/maotoumao">猫头猫</a>。</p>
+<p>和普通音乐软件最大的区别在于：<strong>它本身不带任何音源</strong>。</p>
+<p>装上它、但不装插件时，它就是一个纯粹的<strong>本地音乐播放器</strong>——只能播你自己手机里的歌。</p>
+<p>而当你装上插件之后，它就变成了一个能搜全网的音乐软件。</p>
+<p>这种设计的好处很直接：</p>
+<ul>
+<li><strong>没有服务器</strong>，作者不提供任何音乐内容，所以不会被封</li>
+<li><strong>插件独立存在</strong>，某个音源失效了，换一个插件就行，不用等软件更新</li>
+<li><strong>无广告、无会员、无开屏</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>信息</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>开源地址</td>
+<td><a href="https://github.com/maotoumao/MusicFree">github.com&#x2F;maotoumao&#x2F;MusicFree</a></td>
+</tr>
+<tr>
+<td>Star 数</td>
+<td>约 2.75 万（2026-10 数据）</td>
+</tr>
+<tr>
+<td>开源协议</td>
+<td>AGPL-3.0</td>
+</tr>
+<tr>
+<td>支持平台</td>
+<td>Android、Windows &#x2F; macOS &#x2F; Linux（桌面版独立仓库）</td>
+</tr>
+<tr>
+<td>官网文档</td>
+<td><a href="https://musicfree.catcat.work/">musicfree.catcat.work</a></td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="相比同类软件的优势"><a href="#相比同类软件的优势" class="headerlink" title="相比同类软件的优势"></a>相比同类软件的优势</h2><p>我把它和几个常见的开源音乐软件横向对比了一下：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>MusicFree</th>
+<th>Listen1</th>
+<th>YesPlayMusic</th>
+<th>LX Music</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>音源可扩展</td>
+<td>✅ <strong>插件化，可自写</strong></td>
+<td>❌ 内置固定</td>
+<td>❌ 内置固定</td>
+<td>⚠️ 自定义源</td>
+</tr>
+<tr>
+<td>音源失效怎么办</td>
+<td><strong>换插件即可</strong></td>
+<td>等作者更新</td>
+<td>等作者更新</td>
+<td>换源</td>
+</tr>
+<tr>
+<td>本地音乐播放</td>
+<td>✅ 支持</td>
+<td>⚠️ 一般</td>
+<td>❌ 不支持</td>
+<td>⚠️ 一般</td>
+</tr>
+<tr>
+<td>无广告</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>移动端</td>
+<td>✅ 安卓原生</td>
+<td>❌ 主要网页</td>
+<td>❌ 无</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>歌单导入</td>
+<td>✅ 多平台</td>
+<td>⚠️ 部分</td>
+<td>✅</td>
+<td>⚠️ 部分</td>
+</tr>
+<tr>
+<td>插件用 JS 写</td>
+<td>✅ 会前端就能写</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody></table>
+<p><strong>我认为它最大的优势是「插件机制」这一条</strong>：</p>
+<p>其他软件的思路是”我把音源写死在代码里”，一旦某个平台改接口或者发律师函，就只能等作者更新，有时候一等就是几个月，甚至项目直接停更。</p>
+<p>MusicFree 把音源部分完全抽离出去，变成一个个独立的 <code>.js</code> 文件。这带来两个好处：</p>
+<ol>
+<li><strong>音源失效不影响软件本体</strong> —— 你只需要换一个插件，软件不用动</li>
+<li><strong>任何人都能写插件</strong> —— 插件就是普通的 CommonJS 模块，会 JavaScript 就能写。作者甚至专门写了一篇 <a href="https://musicfree.catcat.work/plugin/how-to-develop-with-ai.html">用 AI 开发 MusicFree 插件</a> 的文档</li>
+</ol>
+<p>另外<strong>它支持本地音乐播放</strong>这点，是很多在线音乐软件不做的。你可以把本地歌和在线搜的歌混在一个播放列表里。</p>
+<hr>
+<h2 id="下载地址（国内可用）"><a href="#下载地址（国内可用）" class="headerlink" title="下载地址（国内可用）"></a>下载地址（国内可用）</h2><h3 id="Android"><a href="#Android" class="headerlink" title="Android"></a>Android</h3><p>最新版本 <strong>v0.6.2</strong>（2025-10-11 发布），按手机 CPU 架构选择：</p>
+<table>
+<thead>
+<tr>
+<th>架构</th>
+<th>说明</th>
+<th>直链</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>arm64-v8a</strong></td>
+<td>绝大多数手机选这个</td>
+<td><a href="https://ghfast.top/https://github.com/maotoumao/MusicFree/releases/download/v0.6.2/app-arm64-v8a-release.apk">下载</a></td>
+</tr>
+<tr>
+<td>armeabi-v7a</td>
+<td>老旧 32 位手机</td>
+<td><a href="https://ghfast.top/https://github.com/maotoumao/MusicFree/releases/download/v0.6.2/app-armeabi-v7a-release.apk">下载</a></td>
+</tr>
+<tr>
+<td>universal</td>
+<td>不确定就选这个（体积大）</td>
+<td><a href="https://ghfast.top/https://github.com/maotoumao/MusicFree/releases/download/v0.6.2/app-universal-release.apk">下载</a></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>上面用的是 ghfast.top 加速镜像</strong>（实测 1.4 秒响应，GitHub 直链要 4.5 秒）。<br>如果镜像失效，可以换用 <code>https://gh-proxy.com/</code> 拼在 GitHub 原地址前面，或者直接访问<br><a href="https://github.com/maotoumao/MusicFree/releases">GitHub Releases</a>。</p>
+</blockquote>
+<p><strong>不确定自己的手机架构？</strong> 直接在设置里搜”CPU”或用 DevCheck 之类的工具看。<strong>最省事的办法是选 universal 版本</strong>，它包含所有架构，只是文件大约 30MB。</p>
+<h3 id="桌面版（Windows-macOS-Linux）"><a href="#桌面版（Windows-macOS-Linux）" class="headerlink" title="桌面版（Windows &#x2F; macOS &#x2F; Linux）"></a>桌面版（Windows &#x2F; macOS &#x2F; Linux）</h3><p>桌面版在<strong>另一个仓库</strong>：<a href="https://github.com/maotoumao/MusicFreeDesktop">maotoumao&#x2F;MusicFreeDesktop</a>（约 9000 star，同样是 AGPL-3.0）</p>
+<p><a href="https://github.com/maotoumao/MusicFreeDesktop/releases">→ 桌面版 Releases 下载</a></p>
+<h3 id="官方其它获取途径"><a href="#官方其它获取途径" class="headerlink" title="官方其它获取途径"></a>官方其它获取途径</h3><ul>
+<li><strong>微信公众号</strong>：一只猫头猫（每次更新会推送，回复「MusicFree」获取下载地址）</li>
+<li><strong>官网首页</strong>：<a href="https://musicfree.catcat.work/">https://musicfree.catcat.work/</a> 有云盘跳转</li>
+</ul>
+<hr>
+<h2 id="使用教程"><a href="#使用教程" class="headerlink" title="使用教程"></a>使用教程</h2><h3 id="第一步：安装软件"><a href="#第一步：安装软件" class="headerlink" title="第一步：安装软件"></a>第一步：安装软件</h3><p>下载上面的 APK 安装即可。因为是开源软件、没有上架应用商店，安装时系统会提示”未知来源”，允许一下就行。</p>
+<h3 id="第二步：安装插件（关键步骤）"><a href="#第二步：安装插件（关键步骤）" class="headerlink" title="第二步：安装插件（关键步骤）"></a>第二步：安装插件（关键步骤）</h3><p><strong>这一步不做的话，软件搜不到任何歌。</strong></p>
+<p>打开 MusicFree → 左上角菜单 → <strong>插件设置</strong> → 右下角 <strong>+</strong> → <strong>从网络安装插件</strong> → 粘贴下面的订阅地址。</p>
+<h3 id="第三步：推荐用「订阅」而不是单个安装"><a href="#第三步：推荐用「订阅」而不是单个安装" class="headerlink" title="第三步：推荐用「订阅」而不是单个安装"></a>第三步：推荐用「订阅」而不是单个安装</h3><p>订阅的好处是：以后插件更新了，点一下「更新订阅」就能全部更新，不用一个个手动换。</p>
+<p><strong>操作</strong>：插件设置 → 右下角 + → 从网络安装插件 → 填入订阅地址。</p>
+<p>下面这些地址我都实测过国内可访问：</p>
+<table>
+<thead>
+<tr>
+<th>订阅源</th>
+<th>地址</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>官方示例插件</strong></td>
+<td><code>https://gitee.com/maotoumao/MusicFreePlugins/raw/master/plugins.json</code></td>
+<td><strong>推荐先用这个</strong>，作者维护，走 Gitee（实测 502ms）</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>⚠️ 官方示例插件里的音源偏向”能用且合法”，比如 bilibili、猫耳FM、快手、音悦台、歌词网站等。<br>如果你需要更全的音源，社区里有很多第三方插件合集，但<strong>质量参差不齐，且可能随时失效</strong>，<br>需要你自己判断来源是否可信（插件是 JS 代码，运行权限和软件本体相同，详见下面的安全提示）。</p>
+</blockquote>
+<h3 id="官方示例插件包含什么"><a href="#官方示例插件包含什么" class="headerlink" title="官方示例插件包含什么"></a>官方示例插件包含什么</h3><p>我拉了官方订阅源的实际内容，一共 12 个插件：</p>
+<table>
+<thead>
+<tr>
+<th>插件</th>
+<th>用途</th>
+<th>版本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>bilibili</strong></td>
+<td>B 站音频（国内主力音源之一）</td>
+<td>0.2.3</td>
+</tr>
+<tr>
+<td><strong>猫耳FM</strong></td>
+<td>广播剧、有声书</td>
+<td>0.1.4</td>
+</tr>
+<tr>
+<td>快手</td>
+<td>短视频平台音频</td>
+<td>0.0.2</td>
+</tr>
+<tr>
+<td>音悦台</td>
+<td>MV 音乐</td>
+<td>0.0.1</td>
+</tr>
+<tr>
+<td>Youtube</td>
+<td>需要科学上网</td>
+<td>0.0.1</td>
+</tr>
+<tr>
+<td>Audiomack</td>
+<td>国外音乐平台</td>
+<td>0.0.2</td>
+</tr>
+<tr>
+<td>suno</td>
+<td>AI 生成音乐</td>
+<td>0.0.0</td>
+</tr>
+<tr>
+<td>udio</td>
+<td>AI 生成音乐</td>
+<td>0.0.0</td>
+</tr>
+<tr>
+<td>歌词网</td>
+<td>歌词补全</td>
+<td>0.0.0</td>
+</tr>
+<tr>
+<td>歌词千寻</td>
+<td>歌词补全</td>
+<td>0.0.0</td>
+</tr>
+<tr>
+<td><strong>Navidrome</strong></td>
+<td>自建音乐服务器（配合 NAS）</td>
+<td>0.0.0</td>
+</tr>
+<tr>
+<td><strong>WebDAV</strong></td>
+<td>挂载网盘音乐（配合 Alist 等）</td>
+<td>0.0.2</td>
+</tr>
+</tbody></table>
+<p><strong>特别说明两个对折腾党有用的</strong>：</p>
+<ul>
+<li><strong>Navidrome 插件</strong>：如果你像我一样用 NAS 自建了音乐库，这个插件能让 MusicFree 直接播你 NAS 里的歌</li>
+<li><strong>WebDAV 插件</strong>：配合我<a href="/posts/3223447510/">之前写的 Alist 教程</a>，可以把网盘当音乐库。<strong>这两个结合起来，等于把 MusicFree 变成了你自己的私人音乐流媒体</strong></li>
+</ul>
+<h3 id="第四步：搜索和播放"><a href="#第四步：搜索和播放" class="headerlink" title="第四步：搜索和播放"></a>第四步：搜索和播放</h3><p>装好插件后，在首页搜索框搜歌名或歌手。搜出来的结果会<strong>按插件分组</strong>，同一个歌名可能有好几个来源，哪个能播点哪个。</p>
+<p>如果某个音源放不出来，换另一个来源试试——这就是插件化的好处，一个不行换一个。</p>
+<h3 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h3><p><strong>搜不到歌 &#x2F; 播放失败？</strong><br>八成是插件失效了。去插件设置里点「更新订阅」，或者换一个音源。</p>
+<p><strong>插件装不上？</strong><br>同一插件的版本号只能升不能降。如果要装旧版，得先卸载新版。</p>
+<p><strong>想导入别的平台的歌单？</strong><br>部分插件支持歌单导入，在插件设置里能看到。不是所有插件都支持。</p>
+<hr>
+<h2 id="⚠️-关于插件安全，必须说清楚"><a href="#⚠️-关于插件安全，必须说清楚" class="headerlink" title="⚠️ 关于插件安全，必须说清楚"></a>⚠️ 关于插件安全，必须说清楚</h2><p>这是 MusicFree 设计上一个<strong>需要你自己注意的点</strong>，官方文档也明确写了警告。</p>
+<p>插件不是沙箱运行的，<strong>插件的 JS 代码和软件本体的执行环境完全相同</strong>。这意味着：</p>
+<ul>
+<li>一个恶意插件理论上可以读取软件内的数据</li>
+<li>插件可以发起网络请求</li>
+</ul>
+<p>官方文档原话是：”<strong>插件的使用者需要谨慎识别插件的来源</strong>“。</p>
+<p>所以：</p>
+<ul>
+<li>✅ <strong>优先用作者官方的插件源</strong>（本文推荐的那个）</li>
+<li>⚠️ 从网上找的第三方插件合集，装之前最好大致看一眼代码</li>
+<li>❌ 不明来源、加密混淆过的插件，建议别装</li>
+</ul>
+<p><strong>这一点和装浏览器扩展是一个道理</strong> —— 你会随便装一个来路不明的扩展吗？</p>
+<hr>
+<h2 id="我的使用感受"><a href="#我的使用感受" class="headerlink" title="我的使用感受"></a>我的使用感受</h2><p>用了几天，几个印象比较深的点：</p>
+<p><strong>优点</strong></p>
+<ul>
+<li>确实干净，没有任何广告和推广</li>
+<li>插件换源很方便，某个音源挂了不用整个软件重装</li>
+<li>支持本地音乐 + 在线音乐混播，这个组合挺实用</li>
+<li>桌面版和安卓版体验基本一致</li>
+</ul>
+<p><strong>不足</strong></p>
+<ul>
+<li><strong>插件质量依赖社区</strong>，官方示例插件的音源偏保守，想要全一点的音源得自己找</li>
+<li>首次使用必须手动装插件，对不折腾的用户有门槛</li>
+<li>歌词匹配不算特别准（这取决于插件）</li>
+<li>部分音源在弱网下会有卡顿</li>
+</ul>
+<p><strong>适合谁</strong>：愿意花 5 分钟装插件、想要一个干净播放器的人。<br><strong>不适合谁</strong>：希望装完就能用、不想折腾的人 —— 那还是老实开会员吧。</p>
+<hr>
+<h2 id="相关链接汇总"><a href="#相关链接汇总" class="headerlink" title="相关链接汇总"></a>相关链接汇总</h2><table>
+<thead>
+<tr>
+<th>内容</th>
+<th>地址</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>安卓版仓库</td>
+<td><a href="https://github.com/maotoumao/MusicFree">https://github.com/maotoumao/MusicFree</a></td>
+</tr>
+<tr>
+<td>桌面版仓库</td>
+<td><a href="https://github.com/maotoumao/MusicFreeDesktop">https://github.com/maotoumao/MusicFreeDesktop</a></td>
+</tr>
+<tr>
+<td>官方文档</td>
+<td><a href="https://musicfree.catcat.work/">https://musicfree.catcat.work/</a></td>
+</tr>
+<tr>
+<td><strong>官方插件订阅源</strong></td>
+<td><code>https://gitee.com/maotoumao/MusicFreePlugins/raw/master/plugins.json</code></td>
+</tr>
+<tr>
+<td>插件开发文档</td>
+<td><a href="https://musicfree.catcat.work/plugin/introduction.html">https://musicfree.catcat.work/plugin/introduction.html</a></td>
+</tr>
+<tr>
+<td>用 AI 写插件</td>
+<td><a href="https://musicfree.catcat.work/plugin/how-to-develop-with-ai.html">https://musicfree.catcat.work/plugin/how-to-develop-with-ai.html</a></td>
+</tr>
+<tr>
+<td>安卓版下载（加速）</td>
+<td><a href="https://ghfast.top/https://github.com/maotoumao/MusicFree/releases/download/v0.6.2/app-arm64-v8a-release.apk">https://ghfast.top/https://github.com/maotoumao/MusicFree/releases/download/v0.6.2/app-arm64-v8a-release.apk</a></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>本文信息核实于 2026-10-14。插件源和下载地址可能会变化，<br>如果失效请以 <a href="https://musicfree.catcat.work/">官方文档</a> 为准。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>数码玩机技巧</category>
+      </categories>
+      <tags>
+        <tag>MusicFree</tag>
+        <tag>音乐</tag>
+        <tag>开源</tag>
+        <tag>Android</tag>
       </tags>
   </entry>
 </search>
