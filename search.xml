@@ -1,23 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>关于串流</title>
-    <url>/blog/posts/2217363806/</url>
-    <content><![CDATA[<p>最早了解到串流是从 Steam Link 了解到的，也有试着用过，但是使用效果很差，延迟很高而且需要 Steam 常驻启动，总之不是什么很好的选择。然后我又去找了别的串流软件。</p>
-<p>先来说说为什么要串流吧！首先是校园网串流有着得天独厚的优势——校园网是公网，而且上传很高，真的超级高。。。那么基于这个其实我们就可以搞很多花样。例如我可以把电脑放在宿舍，然后出门在外只带一个平板，这样我就可以相当于带一个轻薄本出门，或者可以在外边完成我没有干完的活。或者我也可以给我的手机配一个拉伸手柄然后拿来当掌机玩，但实际上延迟有点高（）。总之串流是一个很不错的东西，借助于校园网的优势，我们可以省去内网穿透或者申请公网 IP 的麻烦——校园网就是公网。另外的，如果你的主板支持网络唤醒，你甚至可以通过软件对你的电脑进行远程唤醒然后游玩，maybe 你回家都可以不带电脑。但是笔记本电脑绝大多数不支持这种东西，我建议还是物理唤醒，没错，给你的舍友发个消息。</p>
-<p>再来说串流软件的选择。我们前面说了 Steam Link 效果不好，那有什么好的呢？网络上推荐你的大多数是 Moonlight + Sunshine 这对开源组合，但是实际上这两个东西配置比较麻烦，实测下来延迟也不低。那主播主播有没有更简单高效的方法？有的兄弟，有的。网易给了我们最一针见血、最通俗、最不绕弯子的软件——<strong>UU 远程</strong>。</p>
-<p>这个软件真的很好。首先极其无脑的设计，只要两边都安装了 UU 就已经配置好了。再来说功能，UU 远程真的提供了超级多的功能：首先是画质和帧率的选择，能让你选择更适合你的网络环境的方式；然后是平板触控方式，可以让你的 Windows 电脑变成 Surface（Win 平板）一样的操作逻辑；还可调节分辨率，开超级屏，直接铺满你的 21:9 的手机屏；还有缩放，不至于屏幕太小看不清字。还有很多很多功能：观看模式、副屏模式、防窥模式、指纹解锁 Windows、快速传文件、远程开关机、远程终端、快捷软件……真的，UU 远程就是版本答案。最重要的是它免费！！！至于什么时候收费官方还没有声明，大家先好好用。</p>
-<p><img src="/blog/images/posts/streaming-post/uu-remote-tablet.jpg" alt="平板串流写稿"></p>
-<p><img src="/blog/images/posts/streaming-post/uu-remote-phone.jpg" alt="手机端 UU 远程界面"></p>
-<p>这个东西，下载很快很方便，你一定要试试！</p>
+    <title>Alist+rclone 搭建自己的云盘 NAS 和影音库</title>
+    <url>/blog/posts/3223447510/</url>
+    <content><![CDATA[<p>先来说为什么要用 Alist。我自己在用的是夸克网盘，然而夸克网盘的播放器一坨，字幕识别不出来，所以没办法，只能去找找别的方法。最开始是下载下来看，但下载又有一个大问题：时间有点太长了，而且一部原盘电影差不多都要 50G 左右，没下载几个就塞满了，很难绷。然后是一天在火车上，看到了 AI 给我推荐的 Alist，于是开始尝试。</p>
+<p>试完以后，Alist 真tm是好东西啊！Alist 能帮你把网盘里的资源挂载出来，从此就不局限于网盘了。再搭配网易的爆米花，走 WebDAV，就可以直接在爆米花里看电影或者动漫，而且字幕解析流畅，还有海报墙：</p>
+<p><img src="/blog/images/posts/alist-rclone/popcorn.jpg" alt="爆米花海报墙"></p>
+<p>更重要的，Alist 并不局限于电脑，安卓端有现成的 APK 可以用，爆米花也有安卓端。另外的，夸克网盘会限制你的设备数量，但是走了 Alist 就不会有这种限制了——我可以把我的网盘登录在我对象的平板上，然后依然可以用平板上的 Alist 管理文件、看视频，真的很方便。</p>
+<p>再然后来说 rclone。爆米花固然是好的，但是这个软件有问题：不同设备走的是同一个账号的话，你的 WebDAV 也只能是一个，电脑甚至不可以填入 WebDAV，得用手机的 Alist（Alist 只要在同一局域网内就可以用）。但是我的手机用的是流量，电脑用的是校园网，就很难绷。所以电脑就要选别的影视软件了。</p>
+<p>最主流的当然是 Emby，但是实际用下来不知道为什么，Emby 的海报墙刮削有点问题，而且电视模式还需要会员！这对于我一个想躺着舒舒服服用手柄选电影看的人很不友好。于是我转向了 Kodi。Kodi 是原生的手柄操控，很棒，还可以导入皮肤插件，做成很好看的海报墙。但是 Kodi 又无法识别 WebDAV，网上主流的做法是接 Emby，然而我发现用 rclone 就可以！</p>
+<p>rclone 是什么？很简单，就是帮你把 Alist 挂载的网盘挂载成盘符，就是这样：</p>
+<p><img src="/blog/images/posts/alist-rclone/rclone-mount.png" alt="rclone 挂载成盘符"></p>
+<p>是的，这样你的夸克网盘就和本地磁盘没什么区别了，然后就可以导入 Kodi 了！这是我的 Kodi，导入了一些皮肤插件：</p>
+<p><img src="/blog/images/posts/alist-rclone/kodi-wall.jpg" alt="Kodi 海报墙"></p>
+<p>再说 rclone 还有什么好处，最直接的就是网盘里的文件可以直接从电脑里读取了。因此！可以让 AI 接手了——你可以让 AI 帮你整理网盘，还可以让 AI 读取网盘文件生成一些东西，总之很方便。</p>
+<p>关于部署 Alist+rclone，大家和自己的 Agent 聊一下就行，我这边出教程的话就没意思了，因为我的也是 DeepSeek 帮忙弄的，甚至海报墙的刮削都是 DeepSeek 搞的。然后是网盘资源，魔法出来直接谷歌搜索是可以搜出来的，我也会放一些在我的<a href="/blog/resources/">资源分享</a>里，大家可以看看。</p>
 ]]></content>
       <categories>
         <category>数码玩机技巧</category>
       </categories>
       <tags>
-        <tag>串流</tag>
-        <tag>UU远程</tag>
-        <tag>平板</tag>
+        <tag>Alist</tag>
+        <tag>rclone</tag>
+        <tag>影音库</tag>
+        <tag>NAS</tag>
       </tags>
   </entry>
   <entry>
@@ -49,32 +55,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Alist+rclone 搭建自己的云盘 NAS 和影音库</title>
-    <url>/blog/posts/3223447510/</url>
-    <content><![CDATA[<p>先来说为什么要用 Alist。我自己在用的是夸克网盘，然而夸克网盘的播放器一坨，字幕识别不出来，所以没办法，只能去找找别的方法。最开始是下载下来看，但下载又有一个大问题：时间有点太长了，而且一部原盘电影差不多都要 50G 左右，没下载几个就塞满了，很难绷。然后是一天在火车上，看到了 AI 给我推荐的 Alist，于是开始尝试。</p>
-<p>试完以后，Alist 真tm是好东西啊！Alist 能帮你把网盘里的资源挂载出来，从此就不局限于网盘了。再搭配网易的爆米花，走 WebDAV，就可以直接在爆米花里看电影或者动漫，而且字幕解析流畅，还有海报墙：</p>
-<p><img src="/blog/images/posts/alist-rclone/popcorn.jpg" alt="爆米花海报墙"></p>
-<p>更重要的，Alist 并不局限于电脑，安卓端有现成的 APK 可以用，爆米花也有安卓端。另外的，夸克网盘会限制你的设备数量，但是走了 Alist 就不会有这种限制了——我可以把我的网盘登录在我对象的平板上，然后依然可以用平板上的 Alist 管理文件、看视频，真的很方便。</p>
-<p>再然后来说 rclone。爆米花固然是好的，但是这个软件有问题：不同设备走的是同一个账号的话，你的 WebDAV 也只能是一个，电脑甚至不可以填入 WebDAV，得用手机的 Alist（Alist 只要在同一局域网内就可以用）。但是我的手机用的是流量，电脑用的是校园网，就很难绷。所以电脑就要选别的影视软件了。</p>
-<p>最主流的当然是 Emby，但是实际用下来不知道为什么，Emby 的海报墙刮削有点问题，而且电视模式还需要会员！这对于我一个想躺着舒舒服服用手柄选电影看的人很不友好。于是我转向了 Kodi。Kodi 是原生的手柄操控，很棒，还可以导入皮肤插件，做成很好看的海报墙。但是 Kodi 又无法识别 WebDAV，网上主流的做法是接 Emby，然而我发现用 rclone 就可以！</p>
-<p>rclone 是什么？很简单，就是帮你把 Alist 挂载的网盘挂载成盘符，就是这样：</p>
-<p><img src="/blog/images/posts/alist-rclone/rclone-mount.png" alt="rclone 挂载成盘符"></p>
-<p>是的，这样你的夸克网盘就和本地磁盘没什么区别了，然后就可以导入 Kodi 了！这是我的 Kodi，导入了一些皮肤插件：</p>
-<p><img src="/blog/images/posts/alist-rclone/kodi-wall.jpg" alt="Kodi 海报墙"></p>
-<p>再说 rclone 还有什么好处，最直接的就是网盘里的文件可以直接从电脑里读取了。因此！可以让 AI 接手了——你可以让 AI 帮你整理网盘，还可以让 AI 读取网盘文件生成一些东西，总之很方便。</p>
-<p>关于部署 Alist+rclone，大家和自己的 Agent 聊一下就行，我这边出教程的话就没意思了，因为我的也是 DeepSeek 帮忙弄的，甚至海报墙的刮削都是 DeepSeek 搞的。然后是网盘资源，魔法出来直接谷歌搜索是可以搜出来的，我也会放一些在我的<a href="/blog/resources/">资源分享</a>里，大家可以看看。</p>
-]]></content>
-      <categories>
-        <category>数码玩机技巧</category>
-      </categories>
-      <tags>
-        <tag>Alist</tag>
-        <tag>rclone</tag>
-        <tag>影音库</tag>
-        <tag>NAS</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>所有人都应该试试 Agent</title>
     <url>/blog/posts/3060075407/</url>
     <content><![CDATA[<p>是的，所有人。并不是说不是计算机专业、不是码农就不去尝试 Agent，我建议所有人都去试试。它会极大地改变你对 AI 的看法，也会让你知道为什么说 AI 是第四次科技革命、会带来大量失业潮，同时也会告诉你 AI 到底带来了什么样的机会，带来了多大的生产力提升。</p>
@@ -98,6 +78,41 @@
       <tags>
         <tag>Agent</tag>
         <tag>AI</tag>
+        <tag>随笔</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于串流</title>
+    <url>/blog/posts/2217363806/</url>
+    <content><![CDATA[<p>最早了解到串流是从 Steam Link 了解到的，也有试着用过，但是使用效果很差，延迟很高而且需要 Steam 常驻启动，总之不是什么很好的选择。然后我又去找了别的串流软件。</p>
+<p>先来说说为什么要串流吧！首先是校园网串流有着得天独厚的优势——校园网是公网，而且上传很高，真的超级高。。。那么基于这个其实我们就可以搞很多花样。例如我可以把电脑放在宿舍，然后出门在外只带一个平板，这样我就可以相当于带一个轻薄本出门，或者可以在外边完成我没有干完的活。或者我也可以给我的手机配一个拉伸手柄然后拿来当掌机玩，但实际上延迟有点高（）。总之串流是一个很不错的东西，借助于校园网的优势，我们可以省去内网穿透或者申请公网 IP 的麻烦——校园网就是公网。另外的，如果你的主板支持网络唤醒，你甚至可以通过软件对你的电脑进行远程唤醒然后游玩，maybe 你回家都可以不带电脑。但是笔记本电脑绝大多数不支持这种东西，我建议还是物理唤醒，没错，给你的舍友发个消息。</p>
+<p>再来说串流软件的选择。我们前面说了 Steam Link 效果不好，那有什么好的呢？网络上推荐你的大多数是 Moonlight + Sunshine 这对开源组合，但是实际上这两个东西配置比较麻烦，实测下来延迟也不低。那主播主播有没有更简单高效的方法？有的兄弟，有的。网易给了我们最一针见血、最通俗、最不绕弯子的软件——<strong>UU 远程</strong>。</p>
+<p>这个软件真的很好。首先极其无脑的设计，只要两边都安装了 UU 就已经配置好了。再来说功能，UU 远程真的提供了超级多的功能：首先是画质和帧率的选择，能让你选择更适合你的网络环境的方式；然后是平板触控方式，可以让你的 Windows 电脑变成 Surface（Win 平板）一样的操作逻辑；还可调节分辨率，开超级屏，直接铺满你的 21:9 的手机屏；还有缩放，不至于屏幕太小看不清字。还有很多很多功能：观看模式、副屏模式、防窥模式、指纹解锁 Windows、快速传文件、远程开关机、远程终端、快捷软件……真的，UU 远程就是版本答案。最重要的是它免费！！！至于什么时候收费官方还没有声明，大家先好好用。</p>
+<p><img src="/blog/images/posts/streaming-post/uu-remote-tablet.jpg" alt="平板串流写稿"></p>
+<p><img src="/blog/images/posts/streaming-post/uu-remote-phone.jpg" alt="手机端 UU 远程界面"></p>
+<p>这个东西，下载很快很方便，你一定要试试！</p>
+]]></content>
+      <categories>
+        <category>数码玩机技巧</category>
+      </categories>
+      <tags>
+        <tag>串流</tag>
+        <tag>UU远程</tag>
+        <tag>平板</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>博客开张啦</title>
+    <url>/blog/posts/391625834/</url>
+    <content><![CDATA[<p>博客正式开张！</p>
+<p>这里是寒塘的小角落，会记录日常、分享玩机技巧、健身心得和好用的资源。</p>
+<p>页面顶部可以逛<strong>画廊</strong>和<strong>资源分享</strong>，右下角有桌宠陪伴，左下角……哦不，现在播放器在右边栏里 🎵</p>
+<p>慢慢写，慢慢填。</p>
+]]></content>
+      <categories>
+        <category>个人日记</category>
+      </categories>
+      <tags>
         <tag>随笔</tag>
       </tags>
   </entry>
@@ -433,21 +448,6 @@
         <tag>音乐</tag>
         <tag>开源</tag>
         <tag>Android</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>博客开张啦</title>
-    <url>/blog/posts/391625834/</url>
-    <content><![CDATA[<p>博客正式开张！</p>
-<p>这里是寒塘的小角落，会记录日常、分享玩机技巧、健身心得和好用的资源。</p>
-<p>页面顶部可以逛<strong>画廊</strong>和<strong>资源分享</strong>，右下角有桌宠陪伴，左下角……哦不，现在播放器在右边栏里 🎵</p>
-<p>慢慢写，慢慢填。</p>
-]]></content>
-      <categories>
-        <category>个人日记</category>
-      </categories>
-      <tags>
-        <tag>随笔</tag>
       </tags>
   </entry>
 </search>
