@@ -31,12 +31,28 @@
     var bubble = pet.querySelector('.dsh-pet-bubble')
     var curGif = ''
 
+    /* 切换 GIF 状态。
+       这里刻意【不加】?t= 时间戳 —— 加了会让浏览器每次都重新下载，
+       实测同一张 GIF 被下载 5 次（190KB）。
+       GIF 只要 src 变了就会从头播放，不换 src 时用缓存即可。
+       如果将来发现某张 GIF 没重新播放（浏览器缓存了动画进度），
+       再对该张单独加时间戳。 */
     function play(name) {
       if (curGif === name) return
       curGif = name
-      // 加时间参数强制重新播放 GIF 动画
-      img.src = PET_DIR + GIF[name] + '?t=' + Date.now()
+      img.src = PET_DIR + GIF[name]
     }
+
+    /* 空闲时预加载其它 GIF，避免切换时卡一下（不占首屏带宽） */
+    function preload() {
+      Object.keys(GIF).forEach(function (k) {
+        if (k === 'idle') return
+        var i = new Image()
+        i.src = PET_DIR + GIF[k]
+      })
+    }
+    if (document.readyState === 'complete') setTimeout(preload, 1500)
+    else window.addEventListener('load', function () { setTimeout(preload, 1500) }, { once: true })
 
     var lines = [
       '咕噜咕噜～',

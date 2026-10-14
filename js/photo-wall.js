@@ -248,35 +248,57 @@
     if (cnt) cnt.textContent = items.length + ' 张';
   }
 
-  /* 胶片带的图片延迟加载。
-     为什么需要：横向滚动的元素用原生 loading="lazy" 会被浏览器判成
-     "永不进入视口"而不加载；但直接 eager 又会让首页首屏多下 300+ KB。
-     折中：用 IntersectionObserver 监听整个胶片带容器，
-     它进入视口前 600px 时再统一赋 src。 */
+  /* 胶片带的图片延迟加载（这是首页最重要的性能优化）。
+     
+     为什么需要：胶片带在首页中部，首屏看不到。它一次要 14 张图，
+     而 GitHub Pages 并发一多就严重降速（实测：9KB 的图要传 22 秒）。
+     如果不延迟，它会和文章封面抢连接，把首屏拖到几十秒。
+
+     策略：
+       1. 首屏阶段一张都不加载（用 lqip 模糊底色占位）
+       2. 等 window.load 之后 + 浏览器空闲，再开始加载
+       3. 若用户快速滚动到胶片带，立即加载（不等空闲）
+     这样既保证首屏快，又不会让用户看到空白。 */
   function lazyMarquee(mount) {
     var imgs = [].slice.call(mount.querySelectorAll('img[data-src]'));
     if (!imgs.length) return;
 
+    var loaded = false;
     function loadAll() {
+      if (loaded) return;
+      loaded = true;
       imgs.forEach(function (img) {
-        if (img.getAttribute('data-src') && !img.src) {
-          img.src = img.getAttribute('data-src');
+        var ds = img.getAttribute('data-src');
+        if (ds && !img.src) {
+          img.src = ds;
           img.removeAttribute('data-src');
         }
       });
     }
 
-    if (!('IntersectionObserver' in window)) { loadAll(); return; }
+    /* 路径 A：用户滚到胶片带附近 —— 立刻加载（体验优先） */
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { io.disconnect(); loadAll(); }
+        });
+      }, { rootMargin: '300px 0px' });
+      io.observe(mount);
+    }
 
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) { io.disconnect(); loadAll(); }
-      });
-    }, { rootMargin: '600px 0px' });   // 提前 600px 就开始加载，滚到时已经好了
-    io.observe(mount);
-
-    /* 兜底：4 秒后无论滚没滚到都加载，避免用户快速跳转时看到空白 */
-    setTimeout(function () { if (imgs.some(function (i) { return i.getAttribute('data-src'); })) loadAll(); }, 4000);
+    /* 路径 B：页面加载完 + 空闲后再加载（不让它和首屏资源抢带宽）。
+       注意不要用固定 setTimeout 兜底 —— 那会在封面还在下载时就插队，
+       正是之前首页卡顿的原因。 */
+    function idleLoad() {
+      if (loaded) return;
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(loadAll, { timeout: 5000 });
+      } else {
+        setTimeout(loadAll, 1200);
+      }
+    }
+    if (document.readyState === 'complete') idleLoad();
+    else window.addEventListener('load', idleLoad, { once: true });
   }
 
   function init(mount) {
