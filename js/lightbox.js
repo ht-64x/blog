@@ -178,6 +178,16 @@
   function ensure(cb) {
     if (cb) loadedCallbacks.push(cb);
 
+    /* 首选路径：Fancybox 已经就绪。
+       我们在 _config.butterfly.yml 里把 vendor/fancybox.umd.js 作为
+       普通 <script> 排在 lightbox.js 之前，所以这里执行时它必然已加载完毕。
+       这样 139KB 的库按文档顺序下载，不会和画廊几十张图片抢连接
+       （之前用动态注入，实测会被图片挤到超时）。 */
+    if (window.Fancybox) {
+      setTimeout(fire, 0);
+      return true;
+    }
+
     var hasJs = !!document.getElementById(JS_ID);
     var hasCss = !!document.getElementById(CSS_ID);
 
@@ -198,24 +208,59 @@
       var js = document.createElement('script');
       js.id = JS_ID;
       js.src = LOCAL_JS;
-      js.onload = fire;
+
+      /* onerror + 超时双保险。
+         实测踩过的坑：脚本请求可能既不出结果也不报错（连接被挂起），
+         这时 onload/onerror 都不会触发，灯箱就永久失效了。
+         所以加一个超时：到点还没就绪就改用 CDN 重试一次。 */
+      var settled = false;
+      var timer = setTimeout(function () {
+        if (settled || window.Fancybox) return;
+        settled = true;
+        if (window.console) console.warn('[lightbox] 本地 Fancybox 加载超时，回退 CDN');
+        loadFallback();
+      }, 6000);
+
+      js.onload = function () {
+        settled = true;
+        clearTimeout(timer);
+        fire();
+      };
       js.onerror = function () {
-        // 本地文件缺失（例如没同步 vendor 目录）→ 退回 CDN，功能不中断
+        if (settled) return;
+        settled = true;
+        clearTimeout(timer);
         if (window.console) console.warn('[lightbox] 本地 Fancybox 缺失，回退 CDN');
-        var fallback = document.createElement('script');
-        fallback.src = CDN + 'fancybox.umd.js';
-        fallback.onload = fire;
-        fallback.onerror = function () {
-          if (window.console) console.warn('[lightbox] Fancybox 加载失败，图片放大不可用');
-        };
-        document.head.appendChild(fallback);
+        loadFallback();
       };
       document.head.appendChild(js);
     } else if (window.Fancybox) {
       // 已加载完成
       setTimeout(fire, 0);
+    } else {
+      /* 标签在、但库没就绪（上一次加载失败或挂起）。
+         等一会儿再看，实在不行走 CDN。 */
+      setTimeout(function () {
+        if (window.Fancybox) { fire(); return; }
+        if (window.console) console.warn('[lightbox] Fancybox 仍未就绪，回退 CDN');
+        loadFallback();
+      }, 3000);
     }
     return hasJs;
+  }
+
+  /* CDN 兜底加载（只在本地失败时用） */
+  var fallbackTried = false;
+  function loadFallback() {
+    if (fallbackTried || window.Fancybox) { if (window.Fancybox) fire(); return; }
+    fallbackTried = true;
+    var s = document.createElement('script');
+    s.src = CDN + 'fancybox.umd.js';
+    s.onload = fire;
+    s.onerror = function () {
+      if (window.console) console.warn('[lightbox] Fancybox 加载失败，图片放大不可用');
+    };
+    document.head.appendChild(s);
   }
 
   /* ---------------- 绑定 ---------------- */
