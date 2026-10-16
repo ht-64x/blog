@@ -1,0 +1,1 @@
+import{t as e}from"./format-BrmadW_w.js";function t(t){return{open:()=>{let n=t.resumable();t.ctx.overlay({title:`难度`,tone:`win`,lines:[],actions:[...n?[{label:`✕ 继续本局`,kind:`secondary`,onPress:()=>t.ctx.overlay(null)}]:[],...t.difficulties.map(n=>({label:e[n.id],kind:`secondary`,onPress:()=>t.onPick(n)}))],hints:[n?`继续本局，或重选难度`:`选个难度开始`]})}}}export{t};

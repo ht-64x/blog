@@ -24,11 +24,17 @@
      数组顺序 = 该列从上到下的顺序（先写的在上面）。
      选择器先相对 #aside-content 找，找不到再全局找（音乐播放器挂在 body 下）。
 
-     分配原则：左右两列高度尽量接近，且都接近中列（文章）的高度。 */
+     分配原则：左右两列高度尽量接近，且都接近中列（文章）的高度。
+
+     ⚠ 音乐播放器必须排第一位。
+     实测：左列从 y≈732 开始、视口高 900，头像卡 h=376，
+     播放器排在它后面就落到 y=1128 —— 首屏完全看不见，
+     要往下滚才找得到，用户感觉就是"播放器偶尔失灵"。
+     放第一位后 y≈732，首屏内可见可点。 */
   var COLUMNS = {
     left: [
+      '#dsh-music',                     // 音乐播放器（首位，保证首屏可见）
       '.card-info',                     // 头像 / 作者卡
-      '#dsh-music',                     // 音乐播放器（紧跟在头像卡下面）
       '.dsh-clock-card',                // 现在时间
       '.dsh-visit-card',                // 来访足迹
       '.dsh-countdown-card'             // 倒计时
@@ -60,14 +66,29 @@
     return true;
   }
 
+  /* 三列布局的生效断点（和 three-col.css 里的 @media 保持一致） */
+  var MIN_WIDTH = 1100;
+
+  /* 当前是否真的处于三列布局。
+     为什么需要这个判断：
+       CSS 里三列只在 ≥1100px 时生效，但 JS 之前是无条件把音乐播放器
+       搬进左列的。结果在手机/窄屏首页，左列是堆叠在页面最底部的，
+       播放器被一起带到 y=3763 的位置（实测），用户根本找不到，
+       表现就是"音乐播放器偶尔失灵"——首页找不到，文章页却正常。
+     所以：只有宽屏（三列真生效）才放进左列；窄屏保持 fixed 浮层。 */
+  function isWide() {
+    return window.innerWidth >= MIN_WIDTH;
+  }
+
   function build() {
     var inner = document.getElementById('content-inner');
     if (!inner || !inner.classList.contains('dsh-3col')) return;
     var aside = document.getElementById('aside-content');
     if (!aside) return;
 
-    /* 给 body 打标记：音乐播放器靠它决定"常驻卡片"还是"左下角浮层" */
-    document.body.classList.add('dsh-three-col');
+    /* body 标记同样只在宽屏加 —— 音乐播放器靠它决定
+       "常驻卡片"（static，在左列里）还是"左下角浮层"（fixed） */
+    document.body.classList.toggle('dsh-three-col', isWide());
 
     /* 1. 确保两个列容器存在。
           ⚠ 关键：列容器必须放在 #aside-content **内部**！
@@ -89,7 +110,19 @@
       aside.appendChild(colR);
     }
 
-    /* 2. 按配置分配（每次调用都重新扫一遍，新卡片会被补进去）。
+    /* 2. 窄屏时把音乐播放器挪回 body。
+          三列布局在窄屏不生效，左列会被堆到页面最底部，
+          播放器留在里面就会跑到 y=3700 那种位置（用户找不到）。
+          挪回 body 后，CSS 的 body:not(.dsh-three-col) 规则
+          会让它变成左下角 fixed 浮层。 */
+    if (!isWide()) {
+      var music = document.getElementById('dsh-music');
+      if (music && music.parentElement !== document.body) {
+        document.body.appendChild(music);
+      }
+    }
+
+    /* 3. 按配置分配（每次调用都重新扫一遍，新卡片会被补进去）。
           slot 用数组下标，保证列内顺序与 COLUMNS 里写的一致。 */
     var placed = [];
     var assign = function (sels, target) {
@@ -99,6 +132,8 @@
         if (!el || placed.indexOf(el) > -1) { slot++; return; }
         /* 只处理卡片本体，别把列容器自己搬进去 */
         if (el === colL || el === colR) { slot++; return; }
+        /* 窄屏时音乐播放器不进左列（它要走 fixed 浮层） */
+        if (!isWide() && el.id === 'dsh-music') { slot++; return; }
         placed.push(el);
         placeAt(el, target, slot);
         slot++;
@@ -107,11 +142,12 @@
     assign(COLUMNS.left, colL);
     assign(COLUMNS.right, colR);
 
-    /* 3. 兜底：侧栏里剩下的孤儿卡片追加到右列末尾，保证不丢
+    /* 4. 兜底：侧栏里剩下的孤儿卡片追加到右列末尾，保证不丢
           （.sticky_layout / #dsh-widgets 是包装容器，递归进去看） */
     var scan = function (parent) {
       Array.prototype.slice.call(parent.children).forEach(function (el) {
         if (el === colL || el === colR) return;
+        if (!isWide() && el.id === 'dsh-music') return;
         var isWrapper = el.classList.contains('sticky_layout') || el.id === 'dsh-widgets';
         if (isWrapper) { scan(el); return; }
         if (placed.indexOf(el) > -1) return;
@@ -121,6 +157,14 @@
     };
     scan(aside);
   }
+
+  /* 窗口尺寸变化时重新计算：
+     宽 → 窄 要把播放器挪出左列；窄 → 宽 再放回去。 */
+  var resizeTimer = null;
+  window.addEventListener('resize', function () {
+    if (resizeTimer) clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(build, 200);
+  });
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', build);

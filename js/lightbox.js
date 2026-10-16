@@ -18,6 +18,14 @@
 (function () {
   'use strict';
 
+  /* 资源地址：优先本地，CDN 兜底。
+     为什么改成本地托管：
+       原来只用 jsdelivr CDN，实测遇到过 ERR_CONNECTION_RESET —— 一旦 CDN 抽风，
+       全站（文章图 / 生活照 / 画廊 / 胶片带）的图片放大就全部失效。
+       本地文件走自己的域名，稳定得多，也少了跨站请求。
+     本地路径：/blog/js/vendor/fancybox.umd.js 和 /blog/css/vendor/fancybox.css */
+  var LOCAL_JS = '/blog/js/vendor/fancybox.umd.js';
+  var LOCAL_CSS = '/blog/css/vendor/fancybox.css';
   var CDN = 'https://cdn.jsdelivr.net/npm/@fancyapps/ui@5/dist/fancybox/';
   var CSS_ID = 'dsh-fancybox-css';
   var JS_ID = 'dsh-fancybox-js';
@@ -159,6 +167,14 @@
   })();
 
   /* ---------------- 依赖加载 ---------------- */
+  function fire() {
+    loadedCallbacks.splice(0).forEach(function (f) {
+      try { f(); } catch (e) {
+        if (window.console) console.warn('[lightbox] 回调出错:', e);
+      }
+    });
+  }
+
   function ensure(cb) {
     if (cb) loadedCallbacks.push(cb);
 
@@ -169,26 +185,35 @@
       var css = document.createElement('link');
       css.id = CSS_ID;
       css.rel = 'stylesheet';
-      css.href = CDN + 'fancybox.css';
+      // 本地优先；本地 404 时再退到 CDN
+      css.href = LOCAL_CSS;
+      css.onerror = function () {
+        if (window.console) console.warn('[lightbox] 本地 CSS 缺失，回退 CDN');
+        css.href = CDN + 'fancybox.css';
+      };
       document.head.appendChild(css);
     }
 
     if (!hasJs) {
       var js = document.createElement('script');
       js.id = JS_ID;
-      js.src = CDN + 'fancybox.umd.js';
-      js.onload = function () {
-        loadedCallbacks.splice(0).forEach(function (f) { try { f(); } catch (e) {} });
-      };
+      js.src = LOCAL_JS;
+      js.onload = fire;
       js.onerror = function () {
-        if (window.console) console.warn('[lightbox] Fancybox 加载失败，图片放大不可用');
+        // 本地文件缺失（例如没同步 vendor 目录）→ 退回 CDN，功能不中断
+        if (window.console) console.warn('[lightbox] 本地 Fancybox 缺失，回退 CDN');
+        var fallback = document.createElement('script');
+        fallback.src = CDN + 'fancybox.umd.js';
+        fallback.onload = fire;
+        fallback.onerror = function () {
+          if (window.console) console.warn('[lightbox] Fancybox 加载失败，图片放大不可用');
+        };
+        document.head.appendChild(fallback);
       };
       document.head.appendChild(js);
     } else if (window.Fancybox) {
       // 已加载完成
-      setTimeout(function () {
-        loadedCallbacks.splice(0).forEach(function (f) { try { f(); } catch (e) {} });
-      }, 0);
+      setTimeout(fire, 0);
     }
     return hasJs;
   }

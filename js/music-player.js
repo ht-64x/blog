@@ -56,7 +56,77 @@
       nameEl.textContent = t.name
       artistEl.textContent = t.artist
       loadLrc(t)
+      saveState()
       if (autoplay) play()
+    }
+
+    /* ---------------- 跨页面续播 ----------------
+       问题：以前切到别的页面（或刷新），音乐就断了，得重新点一次。
+       做法：用 sessionStorage 记住"上次在放哪首、播到第几秒"，
+       新页面加载后如果之前是播放状态，就恢复播放并把进度拖回去。
+       为什么用 sessionStorage 而不是 localStorage：
+       标签页关掉后不该自动续播，sessionStorage 正好符合这个语义。 */
+    var STORE_KEY = 'dsh-music-state'
+
+    function saveState() {
+      try {
+        sessionStorage.setItem(STORE_KEY, JSON.stringify({
+          idx: idx,
+          time: audio.currentTime || 0,
+          playing: !audio.paused && !audio.ended,
+          ts: Date.now()
+        }))
+      } catch (e) { /* 隐私模式下可能不可用，忽略 */ }
+    }
+
+    function readState() {
+      try {
+        var raw = sessionStorage.getItem(STORE_KEY)
+        if (!raw) return null
+        var st = JSON.parse(raw)
+        // 超过 30 分钟的旧状态不恢复，避免莫名其妙自动响
+        if (!st || typeof st.idx !== 'number') return null
+        if (Date.now() - (st.ts || 0) > 30 * 60 * 1000) return null
+        return st
+      } catch (e) { return null }
+    }
+
+    // 定时保存进度（timeupdate 太频繁，2 秒一次够用）
+    setInterval(function () { if (!audio.paused) saveState() }, 2000)
+    // 页面要走了，赶紧存一下
+    window.addEventListener('pagehide', saveState)
+    window.addEventListener('beforeunload', saveState)
+    // 页面切到后台时也存
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) saveState()
+    })
+
+    function restore() {
+      var st = readState()
+      if (!st) { load(0, false); return }
+      idx = (st.idx + playlist.length) % playlist.length
+      var t = playlist[idx]
+      nameEl.textContent = t.name
+      artistEl.textContent = t.artist
+      loadLrc(t)
+      audio.src = t.url
+      // 先把进度定位到上次的位置，再决定要不要自动播
+      var seekTo = st.time || 0
+      var onMeta = function () {
+        audio.removeEventListener('loadedmetadata', onMeta)
+        try { if (seekTo > 0 && seekTo < (audio.duration || 1e9)) audio.currentTime = seekTo } catch (e) {}
+        if (st.playing) {
+          // 浏览器可能拦截自动播放；失败就退化成"已就绪但暂停"
+          audio.play().catch(function () {
+            playBtn.innerHTML = '<i class="fas fa-play"></i>'
+            player.classList.remove('playing')
+          })
+        } else {
+          playBtn.innerHTML = '<i class="fas fa-play"></i>'
+        }
+      }
+      audio.addEventListener('loadedmetadata', onMeta)
+      audio.load()
     }
 
     // ---- LRC 歌词：playlist 条目加 lrc 字段即可自动加载同步 ----
@@ -146,6 +216,25 @@
       audio.currentTime = (e.clientX - rect.left) / rect.width * audio.duration
     })
 
-    load(0, false)
+    /* 进度条拖动（手机上点击不好定位，支持拖动更友好） */
+    var dragging = false
+    function seekFromEvent(e) {
+      if (!audio.duration) return
+      var rect = bar.getBoundingClientRect()
+      var x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left
+      var r = Math.min(1, Math.max(0, x / rect.width))
+      audio.currentTime = r * audio.duration
+    }
+    bar.addEventListener('pointerdown', function (e) {
+      dragging = true
+      try { bar.setPointerCapture(e.pointerId) } catch (err) {}
+      seekFromEvent(e)
+    })
+    bar.addEventListener('pointermove', function (e) { if (dragging) seekFromEvent(e) })
+    bar.addEventListener('pointerup', function () { dragging = false })
+    bar.addEventListener('pointercancel', function () { dragging = false })
+
+    /* 启动：尝试恢复上次的播放状态（跨页面续播），没有就只加载不播 */
+    restore()
   })
 })()
