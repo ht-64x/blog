@@ -1,32 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Alist+rclone 搭建自己的云盘 NAS 和影音库</title>
-    <url>/blog/posts/3223447510/</url>
-    <content><![CDATA[<p>先来说为什么要用 Alist。我自己在用的是夸克网盘，然而夸克网盘的播放器一坨，字幕识别不出来，所以没办法，只能去找找别的方法。最开始是下载下来看，但下载又有一个大问题：时间有点太长了，而且一部原盘电影差不多都要 50G 左右，没下载几个就塞满了，很难绷。然后是一天在火车上，看到了 AI 给我推荐的 Alist，于是开始尝试。</p>
-<p>试完以后，Alist 真tm是好东西啊！Alist 能帮你把网盘里的资源挂载出来，从此就不局限于网盘了。再搭配网易的爆米花，走 WebDAV，就可以直接在爆米花里看电影或者动漫，而且字幕解析流畅，还有海报墙：</p>
-<p><img src="/blog/images/posts/alist-rclone/popcorn.jpg" alt="爆米花海报墙"></p>
-<p>更重要的，Alist 并不局限于电脑，安卓端有现成的 APK 可以用，爆米花也有安卓端。另外的，夸克网盘会限制你的设备数量，但是走了 Alist 就不会有这种限制了——我可以把我的网盘登录在我对象的平板上，然后依然可以用平板上的 Alist 管理文件、看视频，真的很方便。</p>
-<p>再然后来说 rclone。爆米花固然是好的，但是这个软件有问题：不同设备走的是同一个账号的话，你的 WebDAV 也只能是一个，电脑甚至不可以填入 WebDAV，得用手机的 Alist（Alist 只要在同一局域网内就可以用）。但是我的手机用的是流量，电脑用的是校园网，就很难绷。所以电脑就要选别的影视软件了。</p>
-<p>最主流的当然是 Emby，但是实际用下来不知道为什么，Emby 的海报墙刮削有点问题，而且电视模式还需要会员！这对于我一个想躺着舒舒服服用手柄选电影看的人很不友好。于是我转向了 Kodi。Kodi 是原生的手柄操控，很棒，还可以导入皮肤插件，做成很好看的海报墙。但是 Kodi 又无法识别 WebDAV，网上主流的做法是接 Emby，然而我发现用 rclone 就可以！</p>
-<p>rclone 是什么？很简单，就是帮你把 Alist 挂载的网盘挂载成盘符，就是这样：</p>
-<p><img src="/blog/images/posts/alist-rclone/rclone-mount.png" alt="rclone 挂载成盘符"></p>
-<p>是的，这样你的夸克网盘就和本地磁盘没什么区别了，然后就可以导入 Kodi 了！这是我的 Kodi，导入了一些皮肤插件：</p>
-<p><img src="/blog/images/posts/alist-rclone/kodi-wall.jpg" alt="Kodi 海报墙"></p>
-<p>再说 rclone 还有什么好处，最直接的就是网盘里的文件可以直接从电脑里读取了。因此！可以让 AI 接手了——你可以让 AI 帮你整理网盘，还可以让 AI 读取网盘文件生成一些东西，总之很方便。</p>
-<p>关于部署 Alist+rclone，大家和自己的 Agent 聊一下就行，我这边出教程的话就没意思了，因为我的也是 DeepSeek 帮忙弄的，甚至海报墙的刮削都是 DeepSeek 搞的。然后是网盘资源，魔法出来直接谷歌搜索是可以搜出来的，我也会放一些在我的<a href="/blog/resources/">资源分享</a>里，大家可以看看。</p>
-]]></content>
-      <categories>
-        <category>数码玩机技巧</category>
-      </categories>
-      <tags>
-        <tag>Alist</tag>
-        <tag>rclone</tag>
-        <tag>影音库</tag>
-        <tag>NAS</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>MusicFree：一个插件化的免费音乐播放器</title>
     <url>/blog/posts/1987456320/</url>
     <content><![CDATA[<h2 id="它是什么"><a href="#它是什么" class="headerlink" title="它是什么"></a>它是什么</h2><p><strong>MusicFree</strong> 是一个开源的音乐播放器，作者是 <a href="https://github.com/maotoumao">猫头猫</a>。</p>
@@ -361,6 +335,32 @@
       </tags>
   </entry>
   <entry>
+    <title>Alist+rclone 搭建自己的云盘 NAS 和影音库</title>
+    <url>/blog/posts/3223447510/</url>
+    <content><![CDATA[<p>先来说为什么要用 Alist。我自己在用的是夸克网盘，然而夸克网盘的播放器一坨，字幕识别不出来，所以没办法，只能去找找别的方法。最开始是下载下来看，但下载又有一个大问题：时间有点太长了，而且一部原盘电影差不多都要 50G 左右，没下载几个就塞满了，很难绷。然后是一天在火车上，看到了 AI 给我推荐的 Alist，于是开始尝试。</p>
+<p>试完以后，Alist 真tm是好东西啊！Alist 能帮你把网盘里的资源挂载出来，从此就不局限于网盘了。再搭配网易的爆米花，走 WebDAV，就可以直接在爆米花里看电影或者动漫，而且字幕解析流畅，还有海报墙：</p>
+<p><img src="/blog/images/posts/alist-rclone/popcorn.jpg" alt="爆米花海报墙"></p>
+<p>更重要的，Alist 并不局限于电脑，安卓端有现成的 APK 可以用，爆米花也有安卓端。另外的，夸克网盘会限制你的设备数量，但是走了 Alist 就不会有这种限制了——我可以把我的网盘登录在我对象的平板上，然后依然可以用平板上的 Alist 管理文件、看视频，真的很方便。</p>
+<p>再然后来说 rclone。爆米花固然是好的，但是这个软件有问题：不同设备走的是同一个账号的话，你的 WebDAV 也只能是一个，电脑甚至不可以填入 WebDAV，得用手机的 Alist（Alist 只要在同一局域网内就可以用）。但是我的手机用的是流量，电脑用的是校园网，就很难绷。所以电脑就要选别的影视软件了。</p>
+<p>最主流的当然是 Emby，但是实际用下来不知道为什么，Emby 的海报墙刮削有点问题，而且电视模式还需要会员！这对于我一个想躺着舒舒服服用手柄选电影看的人很不友好。于是我转向了 Kodi。Kodi 是原生的手柄操控，很棒，还可以导入皮肤插件，做成很好看的海报墙。但是 Kodi 又无法识别 WebDAV，网上主流的做法是接 Emby，然而我发现用 rclone 就可以！</p>
+<p>rclone 是什么？很简单，就是帮你把 Alist 挂载的网盘挂载成盘符，就是这样：</p>
+<p><img src="/blog/images/posts/alist-rclone/rclone-mount.png" alt="rclone 挂载成盘符"></p>
+<p>是的，这样你的夸克网盘就和本地磁盘没什么区别了，然后就可以导入 Kodi 了！这是我的 Kodi，导入了一些皮肤插件：</p>
+<p><img src="/blog/images/posts/alist-rclone/kodi-wall.jpg" alt="Kodi 海报墙"></p>
+<p>再说 rclone 还有什么好处，最直接的就是网盘里的文件可以直接从电脑里读取了。因此！可以让 AI 接手了——你可以让 AI 帮你整理网盘，还可以让 AI 读取网盘文件生成一些东西，总之很方便。</p>
+<p>关于部署 Alist+rclone，大家和自己的 Agent 聊一下就行，我这边出教程的话就没意思了，因为我的也是 DeepSeek 帮忙弄的，甚至海报墙的刮削都是 DeepSeek 搞的。然后是网盘资源，魔法出来直接谷歌搜索是可以搜出来的，我也会放一些在我的<a href="/blog/resources/">资源分享</a>里，大家可以看看。</p>
+]]></content>
+      <categories>
+        <category>数码玩机技巧</category>
+      </categories>
+      <tags>
+        <tag>Alist</tag>
+        <tag>rclone</tag>
+        <tag>影音库</tag>
+        <tag>NAS</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>免费的 DeepSeek + Harness</title>
     <url>/blog/posts/334841998/</url>
     <content><![CDATA[<p>先来说一下 Harness 吧，它是 DeepSeek 官方的 Agent，主打万物插件。而且很重要的是，DeepSeek 在 Harness 的缓存命中率特别高，我实测大多数时候在 <strong>99%</strong>，速度也很快，接近 200 tok&#x2F;s。就是经常会雷霆大思考，然后烧掉你很多 token：</p>
@@ -448,6 +448,188 @@
         <tag>Agent</tag>
         <tag>随笔</tag>
         <tag>AI</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>三毛机场 + Clash：一年三块钱的梯子怎么用</title>
+    <url>/blog/posts/2748391650/</url>
+    <content><![CDATA[<h2 id="先说结论"><a href="#先说结论" class="headerlink" title="先说结论"></a>先说结论</h2><p>我在用的这个叫<strong>三毛机场</strong>，最便宜的套餐 <strong>¥3&#x2F;年</strong>（每月 5G 流量）。延迟实测还行，日常刷网页、看文档够用。</p>
+<p>这篇记录一下它是怎么回事，以及怎么用 Clash 导入订阅。</p>
+<blockquote>
+<p>说明：本文只是个人使用记录，不构成推荐。这类服务稳定性参差不齐、随时可能跑路，请自己判断。<strong>请遵守当地法律法规，不要用于任何违法用途。</strong></p>
+</blockquote>
+<hr>
+<h2 id="什么是”机场”"><a href="#什么是”机场”" class="headerlink" title="什么是”机场”"></a>什么是”机场”</h2><p>“机场”是圈内对<strong>代理订阅服务商</strong>的俗称。你自己搭一个代理服务器当然也行，但要买 VPS、配协议、还要防封，折腾成本不低。</p>
+<p>机场的思路是把这些打包卖给你：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">你付钱 → 机场给你一个「订阅地址」（一个 URL）</span><br><span class="line">       → 客户端拉取这个 URL，自动获得一堆节点</span><br><span class="line">       → 节点失效了，机场更新，你刷新一下订阅就换新的</span><br></pre></td></tr></table></figure>
+
+<p>好处是省事，坏处是<strong>你把流量交给了第三方</strong>，而且服务商说关就关。</p>
+<hr>
+<h2 id="三毛机场的套餐"><a href="#三毛机场的套餐" class="headerlink" title="三毛机场的套餐"></a>三毛机场的套餐</h2><p>我截了一张它的价格表：</p>
+<p><img src="/blog/images/posts/sanmao-clash/plans.webp" alt="三毛机场套餐列表"></p>
+<p>拆开看是这样（数据来自截图）：</p>
+<table>
+<thead>
+<tr>
+<th>套餐</th>
+<th>价格</th>
+<th>流量</th>
+<th>折算每月</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>轻量套餐</td>
+<td><strong>¥3 &#x2F; 年</strong></td>
+<td>5G &#x2F; 月</td>
+<td>¥0.25</td>
+</tr>
+<tr>
+<td>小流量套餐</td>
+<td>¥12.99 &#x2F; 年</td>
+<td>120G &#x2F; 月</td>
+<td>¥1.08</td>
+</tr>
+<tr>
+<td>中流量套餐</td>
+<td>¥19.99 &#x2F; 年</td>
+<td>200G &#x2F; 月</td>
+<td>¥1.67</td>
+</tr>
+<tr>
+<td>中量大套餐</td>
+<td>¥29.9 &#x2F; 年</td>
+<td>500G &#x2F; 月</td>
+<td>¥2.49</td>
+</tr>
+<tr>
+<td>大流量套餐</td>
+<td>¥5 &#x2F; 月</td>
+<td>1200G &#x2F; 月</td>
+<td>¥5</td>
+</tr>
+<tr>
+<td>超大流量套餐</td>
+<td>¥8 &#x2F; 月</td>
+<td>3000G &#x2F; 月</td>
+<td>¥8</td>
+</tr>
+</tbody></table>
+<h3 id="一个值得注意的地方"><a href="#一个值得注意的地方" class="headerlink" title="一个值得注意的地方"></a>一个值得注意的地方</h3><p>它的计价方式有点反直觉：<strong>年付的流量天花板比月付低很多</strong>。</p>
+<ul>
+<li>年付最贵的一档（¥29.9&#x2F;年）只有 500G&#x2F;月</li>
+<li>月付 ¥8 那档有 3000G&#x2F;月</li>
+</ul>
+<p>按”每 G 流量单价”算，反而是超大流量套餐最划算（约 0.0027 元&#x2F;G）。所以：</p>
+<ul>
+<li><strong>轻度用户</strong>（只看网页、查资料）：¥3 或 ¥12.99 的年付就够，一年花个位数，这就是”三毛”这个外号的由来</li>
+<li><strong>重度用户</strong>（看视频、下大文件）：别去年付，直接月付大流量更合适</li>
+</ul>
+<p>我选的是年付那档，因为我主要用它查文档和看技术资料，一个月几个 G 都用不完。</p>
+<hr>
+<h2 id="Clash-是什么"><a href="#Clash-是什么" class="headerlink" title="Clash 是什么"></a>Clash 是什么</h2><p><strong>Clash 是一个代理客户端</strong>，不是一个机场。这两件事经常被搞混：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>机场</td>
+<td>提供<strong>节点</strong>（服务器）</td>
+</tr>
+<tr>
+<td>Clash</td>
+<td>决定<strong>哪些流量走节点、哪些直连</strong></td>
+</tr>
+</tbody></table>
+<p>Clash 最实用的能力是<strong>规则分流</strong>。你可以让它：</p>
+<ul>
+<li>访问 GitHub、Google → 走节点</li>
+<li>访问 B 站、淘宝、微信 → 直接连，不浪费流量</li>
+<li>访问公司内网 → 直连</li>
+</ul>
+<p>配置好之后你基本不用管它，开着就行。</p>
+<blockquote>
+<p>Clash 本体（原版）已经停止维护，现在常见的是各种衍生客户端，比如 Windows 上的 Clash Verge &#x2F; Mihomo Party、macOS 上的 ClashX &#x2F; Clash Verge、Android 上的 Clash for Android &#x2F; FlClash。操作逻辑基本一致。</p>
+</blockquote>
+<hr>
+<h2 id="完整步骤"><a href="#完整步骤" class="headerlink" title="完整步骤"></a>完整步骤</h2><h3 id="第一步：买套餐"><a href="#第一步：买套餐" class="headerlink" title="第一步：买套餐"></a>第一步：买套餐</h3><p>在官网注册、选套餐、付款。付完之后进入用户中心，能看到自己的订阅信息。</p>
+<h3 id="第二步：拿订阅地址"><a href="#第二步：拿订阅地址" class="headerlink" title="第二步：拿订阅地址"></a>第二步：拿订阅地址</h3><p>这一步是关键。在用户中心找到「一键订阅」之类的入口，点开会有几个选项：</p>
+<p><img src="/blog/images/posts/sanmao-clash/subscribe-menu.webp" alt="订阅菜单：复制订阅地址 &#x2F; 导入到 Clash"></p>
+<p>菜单里有这么几项：</p>
+<ul>
+<li><strong>扫描二维码订阅</strong> —— 手机端用，Clash 里扫码导入</li>
+<li><strong>复制订阅地址</strong> —— 得到那个 URL，手动粘贴</li>
+<li><strong>导入到 Clash</strong> —— 有的机场做了 <code>clash://</code> 协议唤起，点一下直接调起本机 Clash</li>
+</ul>
+<p><strong>推荐用「复制订阅地址」</strong>，最通用，不依赖系统是否关联了 <code>clash://</code>。</p>
+<blockquote>
+<p>⚠️ 这个 URL 就是你的账号凭证，<strong>不要发给别人</strong>，也不要贴到公开的地方。泄露了别人就能白嫖你的流量，甚至影响你账号。</p>
+</blockquote>
+<h3 id="第三步：导入-Clash"><a href="#第三步：导入-Clash" class="headerlink" title="第三步：导入 Clash"></a>第三步：导入 Clash</h3><p>以桌面端为例，大致是这样：</p>
+<ol>
+<li>打开 Clash 客户端，切到<strong>配置</strong>（Profiles）页</li>
+<li>点「新建配置」&#x2F;「导入」&#x2F; 输入框</li>
+<li>把刚才复制的订阅地址粘贴进去，确认</li>
+<li>客户端会去下载配置，成功后列表里会多出一个配置文件</li>
+<li><strong>点一下把它设为当前使用</strong>（有的客户端叫”启用”）</li>
+</ol>
+<p>手机端更简单：在 Clash for Android &#x2F; FlClash 里找到「配置 → 新建 → 从 URL 导入」，粘贴地址即可；或者直接用「扫描二维码订阅」。</p>
+<h3 id="第四步：选节点"><a href="#第四步：选节点" class="headerlink" title="第四步：选节点"></a>第四步：选节点</h3><p>配置导入后，进<strong>代理</strong>（Proxies）页面，能看到一串节点，名字可能是「香港 01」「日本 02」这种。</p>
+<ul>
+<li>手动挑一个延迟低的（客户端一般会显示延迟数字，点一下可以测速）</li>
+<li>或者选「自动选择 &#x2F; URL-Test」这类策略组，让它自己挑最快的</li>
+</ul>
+<h3 id="第五步：刷新"><a href="#第五步：刷新" class="headerlink" title="第五步：刷新"></a>第五步：刷新</h3><p>草稿里我写的是”刷新一下就可以了”——<strong>这一步不能省</strong>。</p>
+<p>因为：</p>
+<ul>
+<li>机场会不定期换节点（旧 IP 被封了就换新的）</li>
+<li>你本地的配置是上次拉取的快照，节点可能已经失效</li>
+</ul>
+<p>所以感觉”突然连不上了”的时候，<strong>第一件事就是去 Clash 里点「更新订阅」</strong>，而不是怀疑自己配置错了。</p>
+<hr>
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><p><strong>导入时报错 &#x2F; 拉取失败？</strong></p>
+<p>先确认订阅地址完整（有的机场地址很长，容易漏字符）。如果地址没问题，可能是机场服务器在维护，过一会儿再试。</p>
+<p><strong>能连上但没网？</strong></p>
+<p>检查两件事：① 系统代理是否真的开了（Clash 里有个”系统代理”开关）② 规则模式是不是把你要访问的网站判给了”直连”。切到「全局模式」试一下，如果全局能用，说明是规则问题。</p>
+<p><strong>网速慢？</strong></p>
+<p>换个节点试试，优先挑延迟低的。晚高峰（20:00-24:00）普遍会慢，这个没办法。</p>
+<p><strong>手机上怎么用？</strong></p>
+<p>Android 用 Clash for Android 或 FlClash，导入方式和桌面端一样。iOS 上 Clash 系客户端基本都下架了，需要在非国区 App Store 另想办法。</p>
+<hr>
+<h2 id="几点提醒"><a href="#几点提醒" class="headerlink" title="几点提醒"></a>几点提醒</h2><p><strong>1. 别把重要的东西放在这类服务上</strong></p>
+<p>机场能看到你的流量走向（虽然 HTTPS 内容本身是加密的）。用它查资料、看视频没问题，但别用它登录重要账号、做敏感操作。</p>
+<p><strong>2. 便宜就意味着不稳定</strong></p>
+<p>¥3 一年的服务，你不能指望它有商业级 SLA。<strong>随时可能挂、可能跑路</strong>，所以别一次充好几年。按年付最多也就亏三十块，心态放平。</p>
+<p><strong>3. 记得更新订阅</strong></p>
+<p>这是最容易忘的一步，也是”突然用不了”最常见的原因。</p>
+<p><strong>4. 合规使用</strong></p>
+<p>这类工具本身是中性技术，但<strong>请遵守当地法律法规</strong>，不要用于任何违法用途。你是成年人，自己判断。</p>
+<hr>
+<h2 id="我的使用感受"><a href="#我的使用感受" class="headerlink" title="我的使用感受"></a>我的使用感受</h2><p>用了几天，记录一下：</p>
+<p><strong>优点</strong></p>
+<ul>
+<li>便宜到几乎没有决策成本，一年三块钱</li>
+<li>延迟确实”还可以”，查 GitHub、看文档、刷技术博客都够用</li>
+<li>订阅导入流程标准，Clash 的规则分流配好之后基本不用管</li>
+</ul>
+<p><strong>不足</strong></p>
+<ul>
+<li>节点质量不稳定，晚高峰会明显变慢</li>
+<li>流量套餐的定价逻辑有点怪（年付流量上限低）</li>
+<li>这类小机场没有售后保障，出问题大概率只能等</li>
+</ul>
+<p><strong>适合谁</strong>：偶尔需要查海外资料、预算极低、不介意折腾的人。<br><strong>不适合谁</strong>：需要稳定长连接（比如远程办公、大文件传输）的人 —— 那还是老实买正规服务。</p>
+]]></content>
+      <categories>
+        <category>数码玩机技巧</category>
+      </categories>
+      <tags>
+        <tag>Clash</tag>
+        <tag>机场</tag>
+        <tag>代理</tag>
+        <tag>工具</tag>
       </tags>
   </entry>
 </search>
