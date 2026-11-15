@@ -80,10 +80,48 @@
     return window.innerWidth >= MIN_WIDTH;
   }
 
+  /* 非首页（文章页 / 相册 / 关于…）：把音乐播放器停靠进侧栏顶部。
+     为什么需要这个：
+       播放器默认是 position:fixed 的左下角浮层。三列布局只在首页生效，
+       其它页面上它就是纯浮层 —— 实测在 1280 宽的文章页上，
+       浮层范围 x=20..300 / y=713..880，而正文从 x=65 开始，
+       等于直接盖住正文的一整段（用户读文章时被挡住）。
+     停靠进侧栏后：position 由 CSS 的 `#aside-content #dsh-music`
+     改成 static，宽度自动适配侧栏，位置在侧栏顶部（实测 y≈432，首屏可见），
+     既不会盖正文，也不会像放侧栏底部那样跑到 y≈2883 找不到。
+     窄屏不动：侧栏此时是隐藏的，保持 fixed 浮层才是唯一可见的位置。 */
+  function dockIntoAside(aside) {
+    var music = document.getElementById('dsh-music');
+
+    /* 没有侧栏的页面（#content-inner.hide-aside：相册 / 关于 / 纯页面）：
+       无处停靠，只能保持浮层。打个标记让 CSS 把浮层缩成紧凑版，
+       减少对照片墙的遮挡（见 _music.styl 的 body.dsh-no-aside）。 */
+    document.body.classList.toggle('dsh-no-aside', !aside);
+
+    if (!music || !aside) return;
+
+    var wide = isWide() && aside.offsetWidth > 0;
+
+    if (wide) {
+      if (music.parentElement !== aside || aside.firstElementChild !== music) {
+        aside.insertBefore(music, aside.firstChild);
+      }
+    } else if (music.parentElement !== document.body) {
+      /* 窄屏：侧栏不显示，挪回 body 走 fixed 浮层（绝对定位不会跟错父级） */
+      document.body.appendChild(music);
+    }
+  }
+
   function build() {
     var inner = document.getElementById('content-inner');
-    if (!inner || !inner.classList.contains('dsh-3col')) return;
     var aside = document.getElementById('aside-content');
+
+    /* 非首页：只负责给播放器找个不挡正文的位置，然后退出。 */
+    if (!inner || !inner.classList.contains('dsh-3col')) {
+      document.body.classList.remove('dsh-three-col');
+      dockIntoAside(aside);
+      return;
+    }
     if (!aside) return;
 
     /* body 标记同样只在宽屏加 —— 音乐播放器靠它决定
